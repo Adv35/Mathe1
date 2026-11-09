@@ -1,0 +1,1612 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathematik 1 – Lernwerk</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+<style>
+:root{--c1:#3b82f6;--c2:#10b981;--c3:#8b5cf6;--c4:#f59e0b;--c5:#ef4444;--c6:#06b6d4;--bg:#f8fafc;--card:#fff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+/* NAV */
+#nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:2px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.07)}
+#nav h1{text-align:center;padding:.5rem 1rem .3rem;font-size:1.1rem;color:var(--muted);letter-spacing:.05em;font-weight:600}
+#tabs{display:flex;overflow-x:auto;scrollbar-width:none}
+#tabs::-webkit-scrollbar{display:none}
+.tab{flex:1;min-width:100px;padding:.65rem .5rem;border:none;background:none;cursor:pointer;font-size:.82rem;font-weight:600;color:var(--muted);border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap}
+.tab:hover{background:#f1f5f9}
+.tab.active{color:#fff;border-bottom-color:transparent}
+.tab[data-ch="1"].active{background:var(--c1)}
+.tab[data-ch="2"].active{background:var(--c2)}
+.tab[data-ch="3"].active{background:var(--c3)}
+.tab[data-ch="4"].active{background:var(--c4);color:#1e293b}
+.tab[data-ch="5"].active{background:var(--c5)}
+.tab[data-ch="6"].active{background:var(--c6)}
+/* CHAPTERS */
+.chapter{display:none;animation:fadein .3s ease}
+.chapter.active{display:block}
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* HERO */
+.hero{padding:2.5rem 1.5rem 2rem;color:#fff;position:relative;overflow:hidden}
+.ch1 .hero{background:linear-gradient(135deg,#1d4ed8,#3b82f6)}
+.ch2 .hero{background:linear-gradient(135deg,#047857,#10b981)}
+.ch3 .hero{background:linear-gradient(135deg,#6d28d9,#8b5cf6)}
+.ch4 .hero{background:linear-gradient(135deg,#b45309,#f59e0b)}
+.ch5 .hero{background:linear-gradient(135deg,#b91c1c,#ef4444)}
+.ch6 .hero{background:linear-gradient(135deg,#0e7490,#06b6d4)}
+.hero h2{font-size:1.8rem;margin-bottom:.4rem}
+.hero p{opacity:.9;max-width:600px;font-size:1rem}
+.tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem}
+.tag{background:rgba(255,255,255,.2);border-radius:20px;padding:.2rem .7rem;font-size:.75rem;font-weight:600;backdrop-filter:blur(4px)}
+/* CONTENT */
+.content{max-width:960px;margin:0 auto;padding:1.5rem 1rem 3rem}
+/* CARDS */
+.card{background:var(--card);border-radius:12px;margin-bottom:1.2rem;box-shadow:0 1px 4px rgba(0,0,0,.07);overflow:hidden}
+.card-header{padding:1rem 1.3rem .8rem;font-size:1.05rem;font-weight:700;display:flex;align-items:center;gap:.5rem}
+.card-body{padding:.2rem 1.3rem 1.2rem}
+/* BOX TYPES */
+.box{border-radius:8px;padding:.9rem 1.1rem;margin:.7rem 0;border-left:4px solid}
+.box-def{background:#eff6ff;border-color:#3b82f6}
+.box-thm{background:#fffbeb;border-color:#f59e0b}
+.box-ex{background:#f0fdf4;border-color:#22c55e}
+.box-tip{background:#faf5ff;border-color:#a855f7}
+.box-warn{background:#fff7ed;border-color:#f97316}
+.box strong{display:block;margin-bottom:.3rem;font-size:.85rem;text-transform:uppercase;letter-spacing:.06em;opacity:.7}
+/* TABLE */
+table{width:100%;border-collapse:collapse;margin:.6rem 0;font-size:.9rem}
+th{background:#f1f5f9;padding:.5rem .7rem;text-align:center;border:1px solid var(--border)}
+td{padding:.45rem .7rem;border:1px solid var(--border);text-align:center}
+tr:nth-child(even) td{background:#fafafa}
+/* CHEAT SHEET */
+.cheat-toggle{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.3rem;background:#0f172a;color:#e2e8f0;cursor:pointer;border-radius:12px;margin-bottom:1.2rem;font-weight:700;font-size:1rem;border:none;width:100%;text-align:left}
+.cheat-toggle:hover{background:#1e293b}
+.cheat-body{display:none;background:#0f172a;color:#e2e8f0;border-radius:0 0 12px 12px;padding:1.2rem 1.4rem;margin-top:-1.2rem;margin-bottom:1.2rem}
+.cheat-body.open{display:block}
+.cheat-body .katex{color:#93c5fd}
+.cheat-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:.6rem}
+@media(max-width:600px){.cheat-row{grid-template-columns:1fr}}
+.cheat-item{background:#1e293b;border-radius:8px;padding:.7rem .9rem;font-size:.88rem}
+.cheat-item .label{font-size:.72rem;text-transform:uppercase;letter-spacing:.07em;color:#94a3b8;margin-bottom:.3rem}
+/* MISC */
+.section-title{font-size:1.2rem;font-weight:700;margin:1.6rem 0 .7rem;padding-bottom:.3rem;border-bottom:2px solid var(--border)}
+.ch1 .section-title{border-color:var(--c1)} .ch2 .section-title{border-color:var(--c2)} .ch3 .section-title{border-color:var(--c3)} .ch4 .section-title{border-color:var(--c4)} .ch5 .section-title{border-color:var(--c5)} .ch6 .section-title{border-color:var(--c6)}
+.pill{display:inline-block;padding:.15rem .55rem;border-radius:20px;font-size:.78rem;font-weight:700;margin:.1rem}
+.pill-blue{background:#dbeafe;color:#1d4ed8} .pill-green{background:#dcfce7;color:#15803d} .pill-purple{background:#f3e8ff;color:#7c3aed} .pill-amber{background:#fef3c7;color:#92400e} .pill-red{background:#fee2e2;color:#991b1b}
+ol,ul{padding-left:1.4rem;margin:.5rem 0}
+li{margin:.2rem 0}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:580px){.two-col{grid-template-columns:1fr}}
+code{background:#f1f5f9;padding:.1rem .35rem;border-radius:4px;font-size:.88em;font-family:'Courier New',monospace}
+</style>
+</head>
+<body>
+
+<div id="nav">
+  <h1>📐 Mathematik 1 – Lernwerk (DHBW 2026)</h1>
+  <div id="tabs">
+    <button class="tab active" data-ch="1" onclick="showChapter(1)">Kap. 1<br><small>Logik &amp; Beweise</small></button>
+    <button class="tab" data-ch="2" onclick="showChapter(2)">Kap. 2<br><small>Mengen &amp; Relationen</small></button>
+    <button class="tab" data-ch="3" onclick="showChapter(3)">Kap. 3<br><small>Algebra</small></button>
+    <button class="tab" data-ch="4" onclick="showChapter(4)">Kap. 4<br><small>Lineare Algebra</small></button>
+    <button class="tab" data-ch="5" onclick="showChapter(5)">Kap. 5<br><small>Analysis</small></button>
+    <button class="tab" data-ch="6" onclick="showChapter(6)">Kap. 6<br><small>Bool'sche Algebra</small></button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- KAPITEL 1: LOGIK & BEWEISE                                         -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<div id="ch1" class="chapter ch1 active">
+  <div class="hero">
+    <h2>Kapitel 1 · Logik &amp; Beweistechniken</h2>
+    <p>Das Fundament aller Mathematik: Aussagen verknüpfen, Wahrheitswerte berechnen und Sätze formal beweisen.</p>
+    <div class="tags">
+      <span class="tag">Aussagenlogik</span><span class="tag">Wahrheitstabellen</span><span class="tag">Logische Äquivalenz</span>
+      <span class="tag">Prädikatenlogik</span><span class="tag">Vollständige Induktion</span><span class="tag">Beweistechniken</span>
+    </div>
+  </div>
+  <div class="content">
+
+    <button class="cheat-toggle" onclick="toggleCheat('cs1')">📋 Cheat Sheet Kapitel 1 – Klick zum Öffnen ▼</button>
+    <div class="cheat-body" id="cs1">
+      <div class="cheat-row">
+        <div class="cheat-item"><div class="label">Negation</div>$\lnot A$: dreht W/F um</div>
+        <div class="cheat-item"><div class="label">Konjunktion</div>$A \land B$: beide wahr → wahr</div>
+        <div class="cheat-item"><div class="label">Disjunktion</div>$A \lor B$: mindestens eine wahr → wahr</div>
+        <div class="cheat-item"><div class="label">Implikation</div>$A \Rightarrow B$: falsch nur wenn A wahr, B falsch</div>
+        <div class="cheat-item"><div class="label">Äquivalenz</div>$A \Leftrightarrow B$: gleicher Wahrheitswert</div>
+        <div class="cheat-item"><div class="label">De Morgan 1</div>$\lnot(A \land B) \equiv \lnot A \lor \lnot B$</div>
+        <div class="cheat-item"><div class="label">De Morgan 2</div>$\lnot(A \lor B) \equiv \lnot A \land \lnot B$</div>
+        <div class="cheat-item"><div class="label">Kontraposition</div>$(A\Rightarrow B) \equiv (\lnot B \Rightarrow \lnot A)$</div>
+        <div class="cheat-item"><div class="label">Modus Ponens</div>$A\Rightarrow B,\;A \;\vdash\; B$</div>
+        <div class="cheat-item"><div class="label">Modus Tollens</div>$A\Rightarrow B,\;\lnot B \;\vdash\; \lnot A$</div>
+        <div class="cheat-item"><div class="label">Direkter Beweis</div>Nimm A an, leite B ab.</div>
+        <div class="cheat-item"><div class="label">Widerspruch</div>Nimm $\lnot B$ an → Widerspruch → B.</div>
+        <div class="cheat-item"><div class="label">Induktion Basis</div>Beweise $A(n_0)$ direkt.</div>
+        <div class="cheat-item"><div class="label">Induktionsschritt</div>$A(n) \Rightarrow A(n+1)$ zeigen.</div>
+      </div>
+    </div>
+
+    <h3 class="section-title">1.1 Aussagen und Verknüpfungen</h3>
+    <div class="card">
+      <div class="card-header">💡 Was ist eine Aussage?</div>
+      <div class="card-body">
+        <div class="box box-def">
+          <strong>Definition</strong>
+          Eine <b>Aussage</b> ist ein Satz, der entweder <b>wahr (W)</b> oder <b>falsch (F)</b> ist – keine Grauzone. Beispiel: „7 ist eine Primzahl" → W. „2+2=5" → F.
+        </div>
+        <p>Aussagen werden mit Großbuchstaben ($A, B, C, \ldots$) bezeichnet und durch <b>logische Junktoren</b> verknüpft:</p>
+        <table>
+          <tr><th>Symbol</th><th>Name</th><th>Bedeutung</th><th>Merkhilfe</th></tr>
+          <tr><td>$\lnot A$</td><td>Negation</td><td>NICHT A</td><td>Dreht alles um</td></tr>
+          <tr><td>$A \land B$</td><td>Konjunktion</td><td>A UND B</td><td>Beide müssen stimmen</td></tr>
+          <tr><td>$A \lor B$</td><td>Disjunktion</td><td>A ODER B (inkl.)</td><td>Mindestens eine stimmt</td></tr>
+          <tr><td>$A \Rightarrow B$</td><td>Implikation</td><td>Wenn A, dann B</td><td>Versprechen: nur gebrochen wenn A=W, B=F</td></tr>
+          <tr><td>$A \Leftrightarrow B$</td><td>Äquivalenz</td><td>A genau dann wenn B</td><td>Gleicher Wahrheitswert</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">📊 Wahrheitstabellen</div>
+      <div class="card-body">
+        <p>Systematisch alle Kombination von W/F durchgehen. Bei $n$ Variablen: $2^n$ Zeilen.</p>
+        <div class="two-col">
+          <div>
+            <table>
+              <tr><th>$A$</th><th>$B$</th><th>$A\land B$</th><th>$A\lor B$</th><th>$A\Rightarrow B$</th><th>$A\Leftrightarrow B$</th></tr>
+              <tr><td>W</td><td>W</td><td>W</td><td>W</td><td>W</td><td>W</td></tr>
+              <tr><td>W</td><td>F</td><td>F</td><td>W</td><td><b>F</b></td><td>F</td></tr>
+              <tr><td>F</td><td>W</td><td>F</td><td>W</td><td>W</td><td>F</td></tr>
+              <tr><td>F</td><td>F</td><td>F</td><td>F</td><td>W</td><td>W</td></tr>
+            </table>
+          </div>
+          <div>
+            <div class="box box-tip">
+              <strong>Aha! Die Implikation</strong>
+              $A \Rightarrow B$ ist nur falsch, wenn die Voraussetzung A wahr ist, aber die Behauptung B falsch. Ein "gebrochenes Versprechen". Ist A bereits falsch, ist die Implikation automatisch wahr – "ex falso quodlibet".
+            </div>
+          </div>
+        </div>
+        <div class="box box-ex">
+          <strong>Beispiel</strong>
+          Zeige: $A \Rightarrow B$ ist äquivalent zu $\lnot A \lor B$.
+          Wahrheitstabelle: Für alle 4 Belegungen stimmen die Werte überein. ✓
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">1.2 Logische Äquivalenzen</h3>
+    <div class="card">
+      <div class="card-header">🔄 Die wichtigsten Äquivalenzgesetze</div>
+      <div class="card-body">
+        <p>Zwei Formeln heißen <b>logisch äquivalent</b> ($\equiv$), wenn sie in jeder Belegung denselben Wahrheitswert haben.</p>
+        <div class="two-col">
+          <div>
+            <div class="box box-def">
+              <strong>De Morgan'sche Gesetze</strong>
+              $$\lnot(A \land B) \equiv \lnot A \lor \lnot B$$
+              $$\lnot(A \lor B) \equiv \lnot A \land \lnot B$$
+              <em>Merkhilfe: Klammer auflösen → AND/OR tauschen, alles negieren.</em>
+            </div>
+            <div class="box box-def">
+              <strong>Distributivgesetze</strong>
+              $$A \land (B \lor C) \equiv (A\land B)\lor(A\land C)$$
+              $$A \lor (B \land C) \equiv (A\lor B)\land(A\lor C)$$
+            </div>
+          </div>
+          <div>
+            <div class="box box-def">
+              <strong>Kontraposition</strong>
+              $$(A \Rightarrow B) \equiv (\lnot B \Rightarrow \lnot A)$$
+              <em>Sehr nützlich für Beweise: statt A→B zeigt man ¬B→¬A.</em>
+            </div>
+            <div class="box box-def">
+              <strong>Weitere Gesetze</strong>
+              <ul>
+                <li>Doppelte Negation: $\lnot\lnot A \equiv A$</li>
+                <li>Absorption: $A\land(A\lor B)\equiv A$</li>
+                <li>Idempotenz: $A\land A\equiv A$</li>
+                <li>Tautologie: $A\lor\lnot A\equiv W$</li>
+                <li>Widerspruch: $A\land\lnot A\equiv F$</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">1.3 Logisches Schließen</h3>
+    <div class="card">
+      <div class="card-header">🔎 Schlussregeln und formaler Kalkül</div>
+      <div class="card-body">
+        <div class="box box-def">
+          <strong>Logisches Schließen</strong>
+          Aus wahren Prämissen werden neue wahre Aussagen abgeleitet. Notation: $P_1, P_2, \ldots \vdash Q$ ("aus den $P_i$ folgt $Q$"). Die Pfeile zeigen Schlussschritte an.
+        </div>
+        <div class="box box-thm">
+          <strong>Die wichtigsten Schlussregeln</strong>
+          <table>
+            <tr><th>Regel</th><th>Schreibweise</th><th>Bedeutung</th></tr>
+            <tr><td><b>Modus Ponens (MP)</b></td><td>$A\Rightarrow B,\; A \;\vdash\; B$</td><td>Wenn A→B und A wahr, dann B wahr</td></tr>
+            <tr><td><b>Modus Tollens (MT)</b></td><td>$A\Rightarrow B,\; \lnot B \;\vdash\; \lnot A$</td><td>Kontraposition angewendet</td></tr>
+            <tr><td><b>Hyp. Syllogismus</b></td><td>$A\Rightarrow B,\; B\Rightarrow C \;\vdash\; A\Rightarrow C$</td><td>Transitivität der Implikation</td></tr>
+            <tr><td><b>Disj. Syllogismus</b></td><td>$A\lor B,\; \lnot A \;\vdash\; B$</td><td>Fällt eine Alternative weg, gilt die andere</td></tr>
+            <tr><td><b>Konj.-Einführung (K)</b></td><td>$A,\; B \;\vdash\; A\land B$</td><td>Aus beiden Teilen folgt die Konjunktion</td></tr>
+            <tr><td><b>Konj.-Beseitigung (KL/KR)</b></td><td>$A\land B \;\vdash\; A \;(\text{bzw. } B)$</td><td>Aus der Konjunktion folgt jeder Teil</td></tr>
+            <tr><td><b>Disj.-Einführung (DL/DR)</b></td><td>$A \;\vdash\; A\lor B$</td><td>Aus A folgt A∨B</td></tr>
+            <tr><td><b>TND</b></td><td>$\vdash A\lor\lnot A$</td><td>Tertium non datur – kein Drittes möglich</td></tr>
+          </table>
+        </div>
+        <div class="box box-ex">
+          <strong>Beispiel: Beweiskette</strong>
+          Gegeben: $(1)$ Wenn es regnet, wird die Straße nass ($R\Rightarrow S$).<br>
+          $(2)$ Wenn die Straße nass ist, rutscht es ($S\Rightarrow T$).<br>
+          $(3)$ Es regnet ($R$).<br>
+          <b>Schritt 1 – Hyp. Syllogismus:</b> $(1),(2) \vdash R\Rightarrow T$<br>
+          <b>Schritt 2 – Modus Ponens:</b> $R\Rightarrow T,\; R \vdash T$ ✓
+        </div>
+        <div class="box box-warn">
+          <strong>Häufige Denkfehler (UNGÜLTIGE Schlüsse!)</strong>
+          <ul>
+            <li><b>Affirmation des Konsequens (FALSCH):</b> $A\Rightarrow B,\; B \;\not\vdash\; A$<br>„Die Straße ist nass, also regnet es" – könnte auch Gartenschlauch sein!</li>
+            <li><b>Negation des Antezedens (FALSCH):</b> $A\Rightarrow B,\; \lnot A \;\not\vdash\; \lnot B$<br>„Es regnet nicht, also ist die Straße nicht nass" – falsch aus demselben Grund.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">1.4 Prädikatenlogik</h3>
+    <div class="card">
+      <div class="card-header">∀ Quantoren und Prädikate</div>
+      <div class="card-body">
+        <div class="box box-def">
+          <strong>Prädikat</strong>
+          Ein <b>Prädikat</b> $P(x)$ ist eine Aussage mit freier Variable $x$. Erst wenn $x$ einen Wert bekommt, ist es eine Aussage: $P(3)$ ist W oder F.
+        </div>
+        <div class="two-col">
+          <div class="box box-def">
+            <strong>Allquantor $\forall$</strong>
+            $\forall x \in M: P(x)$ — „Für alle $x$ aus $M$ gilt $P(x)$."<br>
+            <em>Wahr genau dann, wenn P für jedes einzelne Element gilt.</em>
+          </div>
+          <div class="box box-def">
+            <strong>Existenzquantor $\exists$</strong>
+            $\exists x \in M: P(x)$ — „Es gibt (mindestens) ein $x$ in $M$ mit $P(x)$."<br>
+            <em>Wahr genau dann, wenn mindestens ein Element P erfüllt.</em>
+          </div>
+        </div>
+        <div class="box box-thm">
+          <strong>Negation von Quantoren</strong>
+          $$\lnot(\forall x: P(x)) \equiv \exists x: \lnot P(x)$$
+          $$\lnot(\exists x: P(x)) \equiv \forall x: \lnot P(x)$$
+          <em>„Nicht alle schwimmen" = „Mindestens einer schwimmt nicht."</em>
+        </div>
+        <div class="box box-ex">
+          <strong>Beispiel</strong>
+          $\forall n \in \mathbb{N}: n^2 \geq n$ — stimmt das? Für $n=0$: $0\geq 0$ ✓. Für $n=1$: $1\geq 1$ ✓. Für $n\geq 1$: $n^2 = n\cdot n \geq n\cdot 1 = n$ ✓. Aussage ist wahr.
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">1.5 Beweistechniken</h3>
+    <div class="card">
+      <div class="card-header">🔬 Die 5 Beweismethoden</div>
+      <div class="card-body">
+        <div class="box box-def">
+          <strong>1. Direkter Beweis</strong>
+          Ziel: Beweise $A \Rightarrow B$.<br>
+          Vorgehen: Nimm $A$ als wahr an. Leite schrittweise $B$ ab.<br>
+          <em>Beispiel: Wenn $n$ gerade, dann $n^2$ gerade. (Setze $n=2k$, dann $n^2=4k^2=2(2k^2)$ → gerade.)</em>
+        </div>
+        <div class="box box-def">
+          <strong>2. Indirekter Beweis / Kontraposition</strong>
+          Zeige $\lnot B \Rightarrow \lnot A$ statt $A \Rightarrow B$.<br>
+          <em>Wenn $n^2$ ungerade, dann $n$ ungerade.</em>
+        </div>
+        <div class="box box-def">
+          <strong>3. Widerspruchsbeweis (Reductio ad absurdum)</strong>
+          Nehme $\lnot B$ an. Leite einen Widerspruch her. Also muss $B$ wahr sein.<br>
+          <em>Klassisch: $\sqrt{2}$ ist irrational. Annahme: $\sqrt{2}=p/q$ (vollständig gekürzt) → $2q^2=p^2$ → $p$ gerade → $p=2k$ → $2q^2=4k^2$ → $q^2=2k^2$ → $q$ gerade → Widerspruch zu „vollständig gekürzt".</em>
+        </div>
+        <div class="box box-thm">
+          <strong>4. Vollständige Induktion</strong>
+          Ziel: Beweise $A(n)$ für alle $n \geq n_0$.
+          <ol>
+            <li><b>Induktionsanfang:</b> Beweise $A(n_0)$ direkt (z.B. $n_0=1$).</li>
+            <li><b>Induktionsvoraussetzung (IV):</b> „Angenommen $A(n)$ gilt für ein beliebiges $n \geq n_0$."</li>
+            <li><b>Induktionsschritt:</b> Beweise $A(n) \Rightarrow A(n+1)$ unter Verwendung der IV.</li>
+          </ol>
+        </div>
+        <div class="box box-ex">
+          <strong>Beispiel Induktion: Gaußsche Summenformel</strong>
+          Behauptung: $\sum_{k=1}^{n} k = \frac{n(n+1)}{2}$<br>
+          <b>Anfang:</b> $n=1$: $\sum_{k=1}^{1}k = 1 = \frac{1\cdot 2}{2}$ ✓<br>
+          <b>Schritt:</b> $\sum_{k=1}^{n+1}k = \underbrace{\sum_{k=1}^{n}k}_{\text{IV}=\frac{n(n+1)}{2}} + (n+1) = \frac{n(n+1)}{2}+\frac{2(n+1)}{2} = \frac{(n+1)(n+2)}{2}$ ✓
+        </div>
+        <div class="box box-def">
+          <strong>5. Gegenbeispiel</strong>
+          Ziel: Widerlegung einer Allaussage $\forall x: P(x)$.<br>
+          Vorgehen: Ein einziges $x_0$ mit $\lnot P(x_0)$ genügt als <b>Gegenbeispiel</b>.<br>
+          <em>Beispiel: „Alle Primzahlen sind ungerade" – Gegenbeispiel: 2 ist prim und gerade. ✓ Aussage widerlegt.</em>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- KAPITEL 2: MENGEN & RELATIONEN                                     -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<div id="ch2" class="chapter ch2">
+  <div class="hero">
+    <h2>Kapitel 2 · Mengen, Relationen &amp; Funktionen</h2>
+    <p>Von Grundmengen über Äquivalenzrelationen zu Ordnungen – das algebraische Gerüst der Mathematik.</p>
+    <div class="tags">
+      <span class="tag">Mengenlehre</span><span class="tag">Peano-Axiome</span><span class="tag">Komplexe Zahlen</span>
+      <span class="tag">Relationen</span><span class="tag">Äquivalenzklassen</span><span class="tag">Hasse-Diagramm</span><span class="tag">Bijektionen</span>
+    </div>
+  </div>
+  <div class="content">
+
+    <button class="cheat-toggle" onclick="toggleCheat('cs2')">📋 Cheat Sheet Kapitel 2 – Klick zum Öffnen ▼</button>
+    <div class="cheat-body" id="cs2">
+      <div class="cheat-row">
+        <div class="cheat-item"><div class="label">Teilmenge</div>$A\subseteq B$: jedes $x\in A$ ist auch $\in B$</div>
+        <div class="cheat-item"><div class="label">Potenzmenge</div>$|\mathcal{P}(M)| = 2^{|M|}$</div>
+        <div class="cheat-item"><div class="label">Äquivalenzrelation</div>Reflexiv + Symmetrisch + Transitiv</div>
+        <div class="cheat-item"><div class="label">Ordnungsrelation</div>Reflexiv + Antisymmetrisch + Transitiv</div>
+        <div class="cheat-item"><div class="label">Injektiv</div>$f(x_1)=f(x_2)\Rightarrow x_1=x_2$</div>
+        <div class="cheat-item"><div class="label">Surjektiv</div>Jedes $y\in B$ hat ein Urbild</div>
+        <div class="cheat-item"><div class="label">Bijektiv</div>Injektiv + Surjektiv</div>
+        <div class="cheat-item"><div class="label">Kreuzprodukt</div>$|A\times B|=|A|\cdot|B|$</div>
+        <div class="cheat-item"><div class="label">Permutationen</div>$n!$ Permutationen einer $n$-elementigen Menge</div>
+        <div class="cheat-item"><div class="label">Zyklennotation</div>$(1\,3\,5)$: $1\to 3\to 5\to 1$</div>
+        <div class="cheat-item"><div class="label">Komplexe Zahl</div>$z=a+bi$, $i^2=-1$</div>
+        <div class="cheat-item"><div class="label">Betrag</div>$|z|=\sqrt{a^2+b^2}$</div>
+        <div class="cheat-item"><div class="label">Konjugation</div>$\bar{z}=a-bi$, Division: $z_1/z_2=z_1\bar{z}_2/|z_2|^2$</div>
+        <div class="cheat-item"><div class="label">Polarform</div>$z=re^{i\varphi}=r(\cos\varphi+i\sin\varphi)$</div>
+      </div>
+    </div>
+
+    <h3 class="section-title">2.0 Zahlmengen und Komplexe Zahlen</h3>
+    <div class="card">
+      <div class="card-header">🔢 Die Zahlenmengenhierarchie</div>
+      <div class="card-body">
+        <div class="box box-thm">
+          <strong>Hierarchie der Zahlmengen</strong>
+          $$\mathbb{N} \subset \mathbb{N}_0 \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R} \subset \mathbb{C}$$
+          <table>
+            <tr><th>Symbol</th><th>Name</th><th>Elemente (Beispiele)</th></tr>
+            <tr><td>$\mathbb{N}$</td><td>Natürliche Zahlen</td><td>$1, 2, 3, 4, \ldots$</td></tr>
+            <tr><td>$\mathbb{N}_0$</td><td>Nat. Zahlen mit 0</td><td>$0, 1, 2, 3, \ldots$</td></tr>
+            <tr><td>$\mathbb{Z}$</td><td>Ganze Zahlen</td><td>$\ldots, -2, -1, 0, 1, 2, \ldots$</td></tr>
+            <tr><td>$\mathbb{Q}$</td><td>Rationale Zahlen</td><td>$\frac{p}{q}$ mit $p\in\mathbb{Z}, q\in\mathbb{N}$</td></tr>
+            <tr><td>$\mathbb{R}$</td><td>Reelle Zahlen</td><td>$\mathbb{Q}$ + irrationale Zahlen ($\sqrt{2}, \pi, e$)</td></tr>
+            <tr><td>$\mathbb{C}$</td><td>Komplexe Zahlen</td><td>$a+bi$ mit $a,b\in\mathbb{R}$, $i^2=-1$</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">ℂ Komplexe Zahlen</div>
+      <div class="card-body">
+        <div class="box box-def">
+          <strong>Definition</strong>
+          Eine <b>komplexe Zahl</b> hat die Form $z = a + bi$ mit $a,b\in\mathbb{R}$ und der <b>imaginären Einheit</b> $i$ mit $i^2 = -1$.<br>
+          $\text{Re}(z) = a$ (Realteil), $\text{Im}(z) = b$ (Imaginärteil).
+        </div>
+        <div class="two-col">
+          <div class="box box-def">
+            <strong>Gaußsche Zahlenebene</strong>
+            Die komplexen Zahlen werden in der Ebene dargestellt: Realteil auf der $x$-Achse, Imaginärteil auf der $y$-Achse. Jede komplexe Zahl ist ein Punkt $(a, b)$ in der Ebene.
+          </div>
+          <div class="box box-def">
+            <strong>Betrag und Argument</strong>
+            $$|z| = \sqrt{a^2+b^2} \quad \text{(Abstand vom Ursprung)}$$
+            $$\arg(z) = \varphi = \arctan\!\left(\frac{b}{a}\right) \quad \text{(Winkel)}$$
+          </div>
+        </div>
+        <div class="box box-def">
+          <strong>Polarform (trigonometrische Form)</strong>
+          $$z = r(\cos\varphi + i\sin\varphi) = r\,e^{i\varphi}$$
+          mit $r = |z|$ und $\varphi = \arg(z)$. Die Euler-Formel verbindet Exponential- und Winkelfunktionen:
+          $$e^{i\varphi} = \cos\varphi + i\sin\varphi$$
+        </div>
+        <div class="box box-thm">
+          <strong>Rechnen mit komplexen Zahlen</strong>
+          Sei $z_1 = a+bi$, $z_2 = c+di$:
+          <ul>
+            <li><b>Addition:</b> $z_1+z_2 = (a+c)+(b+d)i$</li>
+            <li><b>Multiplikation:</b> $z_1\cdot z_2 = (ac-bd)+(ad+bc)i$<br><em>In Polarform: Beträge multiplizieren, Winkel addieren: $r_1 r_2\, e^{i(\varphi_1+\varphi_2)}$</em></li>
+            <li><b>Konjugation:</b> $\bar{z} = a-bi$ (Imaginärteil negieren); $z\cdot\bar{z}=|z|^2$</li>
+            <li><b>Division:</b> $\dfrac{z_1}{z_2} = \dfrac{z_1\cdot\bar{z}_2}{|z_2|^2}$ (mit konjugiertem Nenner erweitern)</li>
+          </ul>
+        </div>
+        <div class="box box-ex">
+          <strong>Beispiel: Division</strong>
+          $\dfrac{3+4i}{1+2i} = \dfrac{(3+4i)(1-2i)}{(1+2i)(1-2i)} = \dfrac{3-6i+4i-8i^2}{1+4} = \dfrac{11-2i}{5} = \dfrac{11}{5} - \dfrac{2}{5}i$
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">2.1 Grundlagen der Mengenlehre</h3>
+    <div class="card">
+      <div class="card-header">📦 Mengen und ihre Operationen</div>
+      <div class="card-body">
+        <div class="box box-def">
+          <strong>Menge (Cantor)</strong>
+          Eine <b>Menge</b> ist eine Zusammenfassung wohlunterschiedener Objekte zu einem Ganzen. Die Objekte heißen <b>Elemente</b>. Notation: $M = \{1, 2, 3\}$ oder $M = \{x \in \mathbb{Z} \mid x > 0\}$.
+        </div>
+        <div class="box box-tip">
+          <strong>Peano-Axiome (Warum ℕ funktioniert)</strong>
+          Die natürlichen Zahlen werden axiomatisch definiert: (1) 0 ∈ ℕ, (2) Jede natürliche Zahl hat einen Nachfolger, (3) 0 ist kein Nachfolger, (4) Nachfolgerfunktion ist injektiv, (5) Induktionsprinzip. So baut man ℕ aus dem Nichts auf!
+        </div>
+        <table>
+          <tr><th>Operation</th><th>Notation</th><th>Bedeutung</th></tr>
+          <tr><td>Vereinigung</td><td>$A \cup B$</td><td>Elemente in $A$ oder $B$</td></tr>
+          <tr><td>Schnitt</td><td>$A \cap B$</td><td>Elemente in $A$ und $B$</td></tr>
+          <tr><td>Differenz</td><td>$A \setminus B$</td><td>Elemente in $A$, nicht in $B$</td></tr>
+          <tr><td>Symmetr. Differenz</td><td>$A \triangle B$</td><td>$(A\setminus B)\cup(B\setminus A)$</td></tr>
+          <tr><td>Komplement</td><td>$\overline{A}$ oder $A^c$</td><td>$\Omega \setminus A$ (Grundmenge $\Omega$)</td></tr>
+          <tr><td>Kreuzprodukt</td><td>$A \times B$</td><td>$\{(a,b) \mid a\in A, b\in B\}$</td></tr>
+          <tr><td>Potenzmenge</td><td>$\mathcal{P}(A)$</td><td>Menge aller Teilmengen; $|\mathcal{P}(A)|=2^{|A|}$</td></tr>
+        </table>
+        <div class="box box-ex">
+          <strong>Beispiel: Potenzmenge</strong>
+          $A = \{1,2\}$. $\mathcal{P}(A) = \{\emptyset, \{1\}, \{2\}, \{1,2\}\}$. Genau $2^2=4$ Elemente.
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">2.2 Relationen</h3>
+    <div class="card">
+      <div class="card-header">↔ Relationen und ihre Eigenschaften</div>
+      <div class="card-body">
+        <div class="box box-def">
+          <strong>Relation</strong>
+          Eine (binäre) Relation $R$ auf $M$ ist eine Teilmenge $R \subseteq M \times M$. Statt $(x,y)\in R$ schreibt man $x\,R\,y$.
+        </div>
+        <table>
+          <tr><th>Eigenschaft</th><th>Formal</th><th>Alltagsbedeutung</th></tr>
+          <tr><td><b>Reflexiv</b></td><td>$\forall x: x\,R\,x$</td><td>Jeder steht mit sich selbst in Relation</td></tr>
+          <tr><td><b>Symmetrisch</b></td><td>$x\,R\,y \Rightarrow y\,R\,x$</td><td>Wenn A→B, dann B→A</td></tr>
+          <tr><td><b>Antisymmetrisch</b></td><td>$x\,R\,y \land y\,R\,x \Rightarrow x=y$</td><td>Gegenseitig nur bei Gleichheit möglich</td></tr>
+          <tr><td><b>Transitiv</b></td><td>$x\,R\,y \land y\,R\,z \Rightarrow x\,R\,z$</td><td>Kettenregel</td></tr>
+          <tr><td><b>Linear (total)</b></td><td>$x\,R\,y \lor y\,R\,x$</td><td>Je zwei Elemente sind vergleichbar</td></tr>
+        </table>
+        <div class="box box-thm">
+          <strong>Äquivalenzrelation = Refl + Sym + Trans</strong>
+          Beispiel: „Gleiches Alter haben" auf Personen. Jede Äquivalenzrelation zerlegt $M$ in disjunkte <b>Äquivalenzklassen</b> $[x]_R = \{y \in M \mid x\,R\,y\}$. Die Menge aller Klassen heißt <b>Quotientenmenge</b> $M/R$.
+        </div>
+        <div class="box box-thm">
+          <strong>Ordnungsrelationen</strong>
+          <ul>
+            <li><b>Quasiordnung</b>: Reflexiv + Transitiv</li>
+            <li><b>Halbordnung (partielle Ordnung)</b>: + Antisymmetrisch</li>
+            <li><b>Totalordnung (lineare Ordnung)</b>: + Linear</li>
+          </ul>
+          Halbordnungen visualisiert man mit <b>Hasse-Diagrammen</b>: Pfeile nach oben für $x\prec y$ (direkter Vorgänger).
+        </div>
+        <div class="box box-ex">
+          <strong>Hasse-Diagramm: Teilbarkeitsordnung auf {1,2,3,4,6,12}</strong>
+          Im Hasse-Diagramm einer Halbordnung zeichnet man $x$ unterhalb von $y$ (und verbindet sie), wenn $x\prec y$ (direkter Vorgänger, keine Zwischenelemente). Für die Teilbarkeit ($a\mid b$) auf $\{1,2,3,4,6,12\}$:
+          <pre style="font-family:monospace;color:#334155;line-height:1.8;margin-top:.5rem">
+         12
+        /  \
+       4    6
+       |   / \
+       2  3
+        \ | /
+          1
+          </pre>
+          Lies: $2\mid 4$, $2\mid 6$, $3\mid 6$, $4\mid 12$, $6\mid 12$ (nur direkte Verbindungen eingezeichnet).
+        </div>
+        <div class="box box-ex">
+          <strong>Beispiel: Äquivalenzklassen in ℤ₅</strong>
+          $x \sim y \Leftrightarrow 5 \mid (x-y)$: $[0]=\{\ldots,-5,0,5,10,\ldots\}$, $[1]=\{\ldots,-4,1,6,11,\ldots\}$, usw. Es gibt genau 5 Klassen.
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">2.3 Funktionen und Bijektionen</h3>
+    <div class="card">
+      <div class="card-header">→ Funktionen, Injektivität, Surjektivität</div>
+      <div class="card-body">
+        <div class="box box-def">
+          <strong>Funktion (Abbildung)</strong>
+          $f: A \to B$ weist jedem $x\in A$ genau ein $f(x)\in B$ zu. $A$ = Definitionsbereich, $B$ = Wertebereich (Zielbereich).
+        </div>
+        <div class="two-col">
+          <div class="box box-def">
+            <strong>Injektiv</strong>
+            $f(x_1)=f(x_2) \Rightarrow x_1=x_2$<br>
+            <em>Kein Wert wird zweimal getroffen.</em> Grafisch: Horizontale Linie schneidet Graphen max. einmal.
+          </div>
+          <div class="box box-def">
+            <strong>Surjektiv</strong>
+            $\forall y\in B\,\exists x\in A: f(x)=y$<br>
+            <em>Jeder Wert in $B$ wird getroffen.</em> Der Wertebereich = $B$.
+          </div>
+        </div>
+        <div class="box box-thm">
+          <strong>Bijektiv = Injektiv + Surjektiv</strong>
+          Bijektionen haben eine Umkehrabbildung $f^{-1}$. Für endliche Mengen: bijektiv ↔ $|A|=|B|$.
+        </div>
+        <div class="box box-def">
+          <strong>Permutationen</strong>
+          Eine Bijektion $\sigma: M \to M$ heißt <b>Permutation</b>. Für $|M|=n$ gibt es $n!$ Permutationen.<br>
+          <b>Zyklennotation:</b> $(1\;3\;5)$ bedeutet $1\mapsto 3\mapsto 5\mapsto 1$, alle anderen fest.
+        </div>
+        <div class="box box-ex">
+          <strong>Beispiel: Zyklenzerlegung</strong>
+          $\sigma = \begin{pmatrix}1&2&3&4&5\\3&1&5&4&2\end{pmatrix}$: $1\to3\to5\to2\to1$ und $4\to4$. Also $\sigma = (1\;3\;5\;2)(4)=(1\;3\;5\;2)$.
+        </div>
+        <div class="box box-def">
+          <strong>Komposition von Funktionen</strong>
+          Für $f: A\to B$ und $g: B\to C$ ist die <b>Komposition</b> $g\circ f: A\to C$ definiert durch $(g\circ f)(x) = g(f(x))$.<br>
+          Achtung: $g\circ f \neq f\circ g$ im Allgemeinen! Die Reihenfolge zählt: erst $f$, dann $g$.
+        </div>
+        <div class="box box-def">
+          <strong>Inverse Funktion</strong>
+          Ist $f: A\to B$ bijektiv, so existiert die Umkehrfunktion $f^{-1}: B\to A$ mit $f^{-1}(f(x))=x$ und $f(f^{-1}(y))=y$. Man erhält den Graphen von $f^{-1}$ durch Spiegelung des Graphen von $f$ an der Diagonalen $y=x$.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- KAPITEL 3: ALGEBRA                                                  -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<div id="ch3" class="chapter ch3">
+  <div class="hero">
+    <h2>Kapitel 3 · Algebraische Strukturen</h2>
+    <p>Gruppen, Ringe, Körper – abstrakte Strukturen, die hinter Zahlen, Polynomen und der modernen Kryptographie stecken.</p>
+    <div class="tags">
+      <span class="tag">Gruppen</span><span class="tag">Ringe &amp; Körper</span><span class="tag">ℤₙ</span>
+      <span class="tag">Erweiterter Euklid</span><span class="tag">RSA</span><span class="tag">Diffie-Hellman</span>
+    </div>
+  </div>
+  <div class="content">
+
+    <button class="cheat-toggle" onclick="toggleCheat('cs3')">📋 Cheat Sheet Kapitel 3 – Klick zum Öffnen ▼</button>
+    <div class="cheat-body" id="cs3">
+      <div class="cheat-row">
+        <div class="cheat-item"><div class="label">Gruppe</div>Abgeschlossen + Assoziativ + Neutrales + Inverses</div>
+        <div class="cheat-item"><div class="label">Abelsche Gruppe</div>+ Kommutativ</div>
+        <div class="cheat-item"><div class="label">Körper</div>Abelsche Gruppe bzgl. + und × (ohne 0)</div>
+        <div class="cheat-item"><div class="label">ℤₙ ist Körper</div>genau dann wenn $n$ prim</div>
+        <div class="cheat-item"><div class="label">Inverses in ℤₙ</div>Erweiterter Euklidischer Algo</div>
+        <div class="cheat-item"><div class="label">Euler φ(n)</div>$\phi(pq)=(p-1)(q-1)$ für $p,q$ prim</div>
+        <div class="cheat-item"><div class="label">RSA Verschlüsselung</div>$c = m^e \mod n$</div>
+        <div class="cheat-item"><div class="label">RSA Entschlüsselung</div>$m = c^d \mod n$</div>
+        <div class="cheat-item"><div class="label">GGT</div>Euklidischer Algorithmus: $\gcd(a,b)=\gcd(b, a\mod b)$</div>
+        <div class="cheat-item"><div class="label">Kleiner Fermat</div>$a^{p-1}\equiv 1\pmod{p}$ für $p$ prim, $p\nmid a$</div>
+      </div>
+    </div>
+
+    <h3 class="section-title">3.1 Gruppen</h3>
+    <div class="card">
+      <div class="card-header">⚙️ Was ist eine Gruppe?</div>
+      <div class="card-body">
+        <div class="box box-def">
+          <strong>Definition: Gruppe</strong>
+          Ein Tupel $(G, \circ)$ mit einer Menge $G$ und einer Verknüpfung $\circ: G\times G \to G$ heißt <b>Gruppe</b>, wenn gilt:
+          <ol>
+            <li><b>Abgeschlossenheit:</b> $\forall a,b\in G: a\circ b \in G$</li>
+            <li><b>Assoziativität:</b> $(a\circ b)\circ c = a\circ(b\circ c)$</li>
+            <li><b>Neutrales Element:</b> $\exists e\in G\,\forall a: e\circ a = a\circ e = a$</li>
+            <li><b>Inverses Element:</b> $\forall a\in G\,\exists a^{-1}: a\circ a^{-1}=e$</li>
+          </ol>
+          Zusätzlich <b>kommutativ</b> → <b>abelsche Gruppe</b>.
+        </div>
+        <div class="box box-ex">
+          <strong>Beispiele</strong>
+          <ul>
+            <li>$(\mathbb{Z},+)$: Gruppe. Neutral: 0. Invers: $-n$.</li>
+            <li>$(\mathbb{Z}\setminus\{0\},\cdot)$: Keine Gruppe! $2$ hat kein ganzzahliges Inverses.</li>
+            <li>$(\mathbb{Q}\setminus\{0\},\cdot)$: Gruppe. Invers: $1/q$.</li>
+            <li>$(\mathbb{Z}_n, +_n)$: Gruppe der Reste mod $n$.</li>
+          </ul>
+        </div>
+        <div class="box box-thm">
+          <strong>Untergruppe (Kriterium)</strong>
+          $H\subseteq G$ ist Untergruppe von $(G,\circ)$ genau dann, wenn:
+          (1) $H\neq\emptyset$, (2) $\forall a,b\in H: a\circ b\in H$, (3) $\forall a\in H: a^{-1}\in H$.
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">3.1b Zyklische Gruppen und Gruppenordnung</h3>
+    <div class="card">
+      <div class="card-header">🔄 Ordnung von Elementen und zyklische Gruppen</div>
+      <div class="card-body">
+        <div class="box box-def">
+          <strong>Ordnung eines Elements</strong>
+          Die <b>Ordnung</b> $\text{ord}(a)$ eines Elements $a$ in einer Gruppe $(G,\circ)$ ist die kleinste positive ganze Zahl $n$ mit $a^n = e$ (neutrales Element). Falls kein solches $n$ existiert, hat $a$ unendliche Ordnung.
+        </div>
+        <div class="box box-def">
+          <strong>Zyklische Gruppe</strong>
+          Eine Gruppe $G$ heißt <b>zyklisch</b>, wenn es ein $g\in G$ gibt (ein <b>Erzeuger</b>), sodass $G = \langle g \rangle = \{g^0, g^1, g^2, \ldots\}$. Dann ist $G\cong \mathbb{Z}_n$ (für $|G|=n&lt;\infty$) oder $G\cong \mathbb{Z}$ (für $|G|=\infty$).
+        </div>
+        <div class="box box-ex">
+          <strong>Beispiel: ℤ₆ und ihre Erzeuger</strong>
+          $\mathbb{Z}_6 = \{0,1,2,3,4,5\}$ mit Addition mod 6. Erzeuger: $1$ und $5$ (weil $\gcd(1,6)=\gcd(5,6)=1$).<br>
+          Ordnungen: $\text{ord}(0)=1$, $\text{ord}(1)=6$, $\text{ord}(2)=3$, $\text{ord}(3)=2$, $\text{ord}(4)=3$, $\text{ord}(5)=6$.<br>
+          <em>Satz von Lagrange: $\text{ord}(a)$ teilt $|G|$.</em>
+        </div>
+        <div class="box box-thm">
+          <strong>Erzeugte Untergruppen</strong>
+          Für jedes $g\in G$ ist $\langle g\rangle = \{g^k \mid k\in\mathbb{Z}\}$ die kleinste Untergruppe, die $g$ enthält. Es gilt $|\langle g\rangle| = \text{ord}(g)$.
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">3.2 Ringe und Körper</h3>
+    <div class="card">
+      <div class="card-header">💎 Ringe, Körper und ℤₙ</div>
+      <div class="card-body">
+        <div class="box box-def">
+          <strong>Ring</strong>
+          $(R, +, \cdot)$ ist ein <b>Ring</b>: $(R,+)$ ist abelsche Gruppe, $\cdot$ ist assoziativ und distributiv über $+$.
+        </div>
+        <div class="box box-def">
+          <strong>Körper</strong>
+          Ein Ring, in dem $(R\setminus\{0\},\cdot)$ eine abelsche Gruppe ist, heißt <b>Körper</b>. Jedes Element (außer 0) hat ein multiplikatives Inverses. Beispiele: $\mathbb{Q}, \mathbb{R}, \mathbb{C}$.
+        </div>
+        <div class="box box-thm">
+          <strong>ℤₙ ist Körper ⟺ n ist Primzahl</strong>
+          $\mathbb{Z}_p$ für Primzahlen $p$ ist ein endlicher Körper. Das multiplikative Inverse von $a$ in $\mathbb{Z}_p$ findet man mit dem erweiterten euklidischen Algorithmus.
+        </div>
+        <div class="box box-ex">
+          <strong>Beispiel: Inverses in ℤ₇</strong>
+          Gesucht: $3^{-1}$ in $\mathbb{Z}_7$, d.h. $x$ mit $3x \equiv 1 \pmod 7$.
+          Probe: $3\cdot 5 = 15 = 2\cdot 7 + 1 \equiv 1$. Also $3^{-1} = 5$.
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">3.2b Polynomring und Restklassentafeln</h3>
+    <div class="card">
+      <div class="card-header">📐 Polynomring R[x] und Rechnen in ℤₙ</div>
+      <div class="card-body">
+        <div class="box box-def">
+          <strong>Polynomring R[x]</strong>
+          Die Menge aller Polynome $p(x) = a_n x^n + \ldots + a_1 x + a_0$ mit Koeffizienten $a_i\in R$ bildet mit Addition und Multiplikation den <b>Polynomring $R[x]$</b>. Addition und Multiplikation erfolgen wie gewohnt (koeffizientenweise bzw. ausmultiplizieren).<br>
+          <em>Beispiel: In $\mathbb{Z}_2[x]$: $(x^2+x+1)\cdot(x+1) = x^3+x^2+x^2+x+x+1 = x^3+1$ (da $2\equiv 0$).</em>
+        </div>
+        <div class="box box-ex">
+          <strong>Additions- und Multiplikationstafel von ℤ₅</strong>
+          <div class="two-col">
+            <div>
+              <b>Addition mod 5:</b>
+              <table>
+                <tr><th>+</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr>
+                <tr><td><b>0</b></td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+                <tr><td><b>1</b></td><td>1</td><td>2</td><td>3</td><td>4</td><td>0</td></tr>
+                <tr><td><b>2</b></td><td>2</td><td>3</td><td>4</td><td>0</td><td>1</td></tr>
+                <tr><td><b>3</b></td><td>3</td><td>4</td><td>0</td><td>1</td><td>2</td></tr>
+                <tr><td><b>4</b></td><td>4</td><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+              </table>
+            </div>
+            <div>
+              <b>Multiplikation mod 5:</b>
+              <table>
+                <tr><th>×</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr>
+                <tr><td><b>0</b></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                <tr><td><b>1</b></td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+                <tr><td><b>2</b></td><td>0</td><td>2</td><td>4</td><td>1</td><td>3</td></tr>
+                <tr><td><b>3</b></td><td>0</td><td>3</td><td>1</td><td>4</td><td>2</td></tr>
+                <tr><td><b>4</b></td><td>0</td><td>4</td><td>3</td><td>2</td><td>1</td></tr>
+              </table>
+            </div>
+          </div>
+          <em>Da 5 prim: In der Multiplikationstabelle jede Zeile (außer 0) eine Permutation → jedes Element hat ein Inverses → $\mathbb{Z}_5$ ist ein Körper.</em>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">3.3 Erweiterter Euklidischer Algorithmus</h3>
+    <div class="card">
+      <div class="card-header">🧮 ggT und multiplikative Inverse berechnen</div>
+      <div class="card-body">
+        <div class="box box-def">
+          <strong>Euklidischer Algorithmus</strong>
+          $$\gcd(a,b) = \gcd(b,\, a \bmod b), \quad \gcd(a,0)=a$$
+          Tabellenformat: Spalten $a$, $b$, $q=\lfloor a/b\rfloor$, $r=a-q\cdot b$.
+        </div>
+        <div class="box box-def">
+          <strong>Erweiterter euklidischer Algorithmus</strong>
+          Findet $s,t$ mit $\gcd(a,b) = s\cdot a + t\cdot b$ (Lemma von Bézout). Rückwärts durch die Tabelle.
+        </div>
+        <div class="box box-ex">
+          <strong>Beispiel: $\gcd(48, 18)$</strong>
+          <table>
+            <tr><th>a</th><th>b</th><th>q</th><th>r</th></tr>
+            <tr><td>48</td><td>18</td><td>2</td><td>12</td></tr>
+            <tr><td>18</td><td>12</td><td>1</td><td>6</td></tr>
+            <tr><td>12</td><td>6</td><td>2</td><td>0</td></tr>
+          </table>
+          $\gcd(48,18)=6$. Rückwärts: $6=18-1\cdot12=18-1\cdot(48-2\cdot18)=3\cdot18-1\cdot48$. Also $s=-1,t=3$.
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">3.4 RSA-Kryptosystem</h3>
+    <div class="card">
+      <div class="card-header">🔐 RSA in 5 Schritten</div>
+      <div class="card-body">
+        <div class="box box-thm">
+          <strong>RSA-Schlüsselerzeugung</strong>
+          <ol>
+            <li>Wähle zwei große Primzahlen $p, q$</li>
+            <li>Berechne $n = p \cdot q$ (öffentlich)</li>
+            <li>Berechne $\phi(n) = (p-1)(q-1)$ (geheim)</li>
+            <li>Wähle $e$ mit $\gcd(e, \phi(n))=1$ (öffentlicher Exponent)</li>
+            <li>Berechne $d = e^{-1} \pmod{\phi(n)}$ (privater Schlüssel)</li>
+          </ol>
+          Öffentlicher Schlüssel: $(n,e)$. Privater Schlüssel: $d$.
+        </div>
+        <div class="box box-def">
+          <strong>Ver- und Entschlüsselung</strong>
+          $$\text{Verschlüsseln: } c = m^e \bmod n$$
+          $$\text{Entschlüsseln: } m = c^d \bmod n$$
+          Sicherheit: Das Faktorisieren großer $n$ ist (bisher) rechnerisch unmöglich.
+        </div>
+        <div class="box box-ex">
+          <strong>Mini-Beispiel RSA</strong>
+          $p=3, q=11 \Rightarrow n=33, \phi(33)=20$. Wähle $e=3$ ($\gcd(3,20)=1$).<br>
+          $d = 3^{-1} \pmod{20}$: $3\cdot 7=21\equiv 1$, also $d=7$.<br>
+          Nachricht $m=2$: $c=2^3 \bmod 33=8$. Decrypt: $8^7\bmod 33=2$. ✓
+        </div>
+        <div class="box box-tip">
+          <strong>Diffie-Hellman Schlüsselaustausch</strong>
+          Öffentlich: Primzahl $p$, Generator $g$. Alice wählt $a$, sendet $A=g^a\bmod p$. Bob wählt $b$, sendet $B=g^b\bmod p$. Gemeinsames Geheimnis: $K=A^b=B^a=g^{ab}\bmod p$.
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">3.5 Satz von Fermat und Euler</h3>
+    <div class="card">
+      <div class="card-header">🧮 Fermat, Euler-Phi und Square-and-Multiply</div>
+      <div class="card-body">
+        <div class="box box-thm">
+          <strong>Kleiner Satz von Fermat</strong>
+          Sei $p$ prim und $\gcd(a,p)=1$. Dann gilt:
+          $$a^{p-1} \equiv 1 \pmod{p}$$
+          <em>Merkhilfe: Die Ordnung der multiplikativen Gruppe $\mathbb{Z}_p^*$ ist $p-1$, und jede Elementordnung teilt die Gruppenordnung.</em><br>
+          Beispiel: $2^6 = 64 = 9\cdot 7 + 1 \equiv 1 \pmod 7$ ✓
+        </div>
+        <div class="box box-thm">
+          <strong>Eulersche Phi-Funktion $\varphi(n)$</strong>
+          $\varphi(n)$ ist die Anzahl der zu $n$ teilerfremden natürlichen Zahlen in $\{1,\ldots,n\}$.<br>
+          <ul>
+            <li>$\varphi(p) = p-1$ für Primzahl $p$</li>
+            <li>$\varphi(p^k) = p^{k-1}(p-1)$</li>
+            <li>$\varphi(pq) = (p-1)(q-1)$ für verschiedene Primzahlen $p,q$</li>
+            <li>$\varphi$ ist multiplikativ: $\gcd(m,n)=1 \Rightarrow \varphi(mn)=\varphi(m)\varphi(n)$</li>
+          </ul>
+          Beispiel: $\varphi(12) = \varphi(4)\cdot\varphi(3) = 2\cdot 2 = 4$ (teilerfremd zu 12: 1,5,7,11).
+        </div>
+        <div class="box box-thm">
+          <strong>Satz von Euler-Fermat</strong>
+          Sei $\gcd(a,n)=1$. Dann gilt:
+          $$a^{\varphi(n)} \equiv 1 \pmod{n}$$
+          <em>Verallgemeinerung des kleinen Fermatsatzes auf beliebige $n$. RSA nutzt genau diesen Satz!</em>
+        </div>
+        <div class="box box-def">
+          <strong>Binäre Exponentiation (Square-and-Multiply)</strong>
+          Berechnung von $a^k \bmod n$ effizient in $O(\log k)$ Schritten statt $O(k)$.<br>
+          <b>Idee:</b> Schreibe $k$ in Binärdarstellung. Verarbeite Bits von links nach rechts:
+          <ol>
+            <li>Starte mit $r=1$</li>
+            <li>Für jedes Bit: $r \leftarrow r^2 \bmod n$</li>
+            <li>Ist das aktuelle Bit = 1: $r \leftarrow r\cdot a \bmod n$</li>
+          </ol>
+          <b>Beispiel:</b> $3^{13} \bmod 7$. $13 = 1101_2$. Bits: 1,1,0,1.<br>
+          Start $r=1$. Bit 1: $r=1^2\cdot 3=3$. Bit 1: $r=3^2\cdot 3=27\equiv 6$. Bit 0: $r=6^2=36\equiv 1$. Bit 1: $r=1^2\cdot 3=3$.<br>
+          $3^{13}\bmod 7 = 3$ ✓ (Check: $3^6\equiv 1$, also $3^{12}\equiv 1$, $3^{13}\equiv 3$)
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- KAPITEL 4: LINEARE ALGEBRA                                          -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<div id="ch4" class="chapter ch4">
+  <div class="hero">
+    <h2>Kapitel 4 · Lineare Algebra</h2>
+    <p>Vektorräume, Matrizen, Determinanten – das Handwerkszeug für Geometrie, Datenwissenschaft und maschinelles Lernen.</p>
+    <div class="tags">
+      <span class="tag">Vektorräume</span><span class="tag">Gauss-Jordan</span><span class="tag">Matrizen</span>
+      <span class="tag">Determinanten</span><span class="tag">Eigenwerte</span><span class="tag">Lineare Gleichungssysteme</span>
+    </div>
+  </div>
+  <div class="content">
+
+    <button class="cheat-toggle" onclick="toggleCheat('cs4')">📋 Cheat Sheet Kapitel 4 – Klick zum Öffnen ▼</button>
+    <div class="cheat-body" id="cs4">
+      <div class="cheat-row">
+        <div class="cheat-item"><div class="label">Vektorraum</div>8 Axiome: 4 für Addition, 4 für Skalarmultiplikation</div>
+        <div class="cheat-item"><div class="label">Basis</div>Linear unabhängig + Erzeugendes System</div>
+        <div class="cheat-item"><div class="label">Dimensionsformel</div>$\dim(\ker f) + \dim(\text{im}\, f) = \dim V$</div>
+        <div class="cheat-item"><div class="label">Determinante 2×2</div>$\det\begin{pmatrix}a&b\\c&d\end{pmatrix}=ad-bc$</div>
+        <div class="cheat-item"><div class="label">Eigenwerte</div>$\det(A-\lambda I)=0$ lösen</div>
+        <div class="cheat-item"><div class="label">Eigenvektoren</div>$(A-\lambda I)\vec{v}=\vec{0}$ lösen</div>
+        <div class="cheat-item"><div class="label">Kreuzprodukt</div>$\vec{a}\times\vec{b}$: senkrecht auf beide, Betrag=Flächeninhalt</div>
+        <div class="cheat-item"><div class="label">Skalarprodukt</div>$\vec{a}\cdot\vec{b}=|\vec{a}||\vec{b}|\cos\theta$</div>
+        <div class="cheat-item"><div class="label">Inverse Matrix</div>$A^{-1}$ via Gauss-Jordan auf $(A|I)$</div>
+        <div class="cheat-item"><div class="label">Gauß-Jordan</div>Zeilenoperationen bis Stufenform / reduzierte Stufenform</div>
+      </div>
+    </div>
+
+    <h3 class="section-title">4.1 Vektorräume</h3>
+    <div class="card">
+      <div class="card-header">🧊 Definition und Grundbegriffe</div>
+      <div class="card-body">
+        <div class="box box-def">
+          <strong>Vektorraum (über Körper K)</strong>
+          $(V, +, \cdot)$ heißt <b>Vektorraum</b>, wenn:
+          <ul>
+            <li>$(V,+)$ ist abelsche Gruppe (Nullvektor $\vec{0}$, Inverses $-\vec{v}$)</li>
+            <li>Skalarmultiplikation $K\times V\to V$ mit:
+              $1\cdot\vec{v}=\vec{v}$, $(\lambda\mu)\vec{v}=\lambda(\mu\vec{v})$,
+              $(\lambda+\mu)\vec{v}=\lambda\vec{v}+\mu\vec{v}$,
+              $\lambda(\vec{u}+\vec{v})=\lambda\vec{u}+\lambda\vec{v}$</li>
+          </ul>
+        </div>
+        <div class="box box-def">
+          <strong>Linearkombination, lineare Unabhängigkeit, Basis</strong>
+          <ul>
+            <li><b>Linearkombination:</b> $\lambda_1\vec{v}_1+\ldots+\lambda_n\vec{v}_n$</li>
+            <li><b>Linear unabhängig:</b> $\lambda_1\vec{v}_1+\ldots+\lambda_n\vec{v}_n=\vec{0} \Rightarrow \lambda_i=0$</li>
+            <li><b>Erzeugendensystem:</b> Jeder Vektor aus $V$ ist Linearkombination der $\vec{v}_i$</li>
+            <li><b>Basis:</b> Linear unabhängig + Erzeugendensystem</li>
+            <li><b>Dimension:</b> Anzahl Basisvektoren (eindeutig!)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">📐 Skalarprodukt und Kreuzprodukt</div>
+      <div class="card-body">
+        <div class="two-col">
+          <div class="box box-def">
+            <strong>Skalarprodukt (ℝⁿ)</strong>
+            $$\vec{a}\cdot\vec{b} = \sum_{i=1}^n a_i b_i = |\vec{a}||\vec{b}|\cos\theta$$
+            $\vec{a}\perp\vec{b} \Leftrightarrow \vec{a}\cdot\vec{b}=0$<br>
+            Norm: $|\vec{a}|=\sqrt{\vec{a}\cdot\vec{a}}$
+          </div>
+          <div class="box box-def">
+            <strong>Kreuzprodukt (ℝ³)</strong>
+            $$\vec{a}\times\vec{b}=\begin{pmatrix}a_2b_3-a_3b_2\\a_3b_1-a_1b_3\\a_1b_2-a_2b_1\end{pmatrix}$$
+            Senkrecht auf $\vec{a}$ und $\vec{b}$. $|\vec{a}\times\vec{b}|$ = Flächeninhalt des Parallelogramms.
+          </div>
+        </div>
+        <div class="box box-ex">
+          <strong>Beispiel: Geraden und Ebenen</strong>
+          <b>Gerade:</b> $\vec{x}=\vec{p}+t\vec{d}$ (Punkt + Richtung, $t\in\mathbb{R}$)<br>
+          <b>Ebene (Parameterform):</b> $\vec{x}=\vec{p}+s\vec{u}+t\vec{v}$<br>
+          <b>Ebene (Normalenform):</b> $\vec{n}\cdot(\vec{x}-\vec{p})=0$, d.h. $\vec{n}\cdot\vec{x}=d$
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">4.2 Lineare Gleichungssysteme und Gauß-Jordan</h3>
+    <div class="card">
+      <div class="card-header">🔢 LGS lösen mit Gauß-Jordan</div>
+      <div class="card-body">
+        <div class="box box-def">
+          <strong>LGS als Matrixgleichung</strong>
+          $A\vec{x}=\vec{b}$ mit $A\in\mathbb{R}^{m\times n}$. Lösungsmethode: Erweiterte Koeffizientenmatrix $(A|\vec{b})$ durch Zeilenoperationen in Stufenform bringen.
+        </div>
+        <div class="box box-thm">
+          <strong>Erlaubte Zeilenoperationen</strong>
+          <ol>
+            <li>Zeile skalieren ($\lambda\neq 0$): $Z_i \leftarrow \lambda Z_i$</li>
+            <li>Vielfaches einer Zeile addieren: $Z_i \leftarrow Z_i + \lambda Z_j$</li>
+            <li>Zeilen tauschen: $Z_i \leftrightarrow Z_j$</li>
+          </ol>
+        </div>
+        <div class="box box-ex">
+          <strong>Beispiel</strong>
+          $$\left(\begin{array}{ccc|c}1&2&1&3\\2&3&1&5\\1&1&0&2\end{array}\right) \xrightarrow{Z_2-2Z_1,Z_3-Z_1} \left(\begin{array}{ccc|c}1&2&1&3\\0&-1&-1&-1\\0&-1&-1&-1\end{array}\right) \xrightarrow{Z_3-Z_2} \left(\begin{array}{ccc|c}1&2&1&3\\0&1&1&1\\0&0&0&0\end{array}\right)$$
+          Frei: $x_3=t$. Rücksubstitution: $x_2=1-t$, $x_1=1+t$.
+        </div>
+        <div class="box box-tip">
+          <strong>Kernel und Bild</strong>
+          $\ker(f) = \{\vec{x}\in V \mid f(\vec{x})=\vec{0}\}$ — der Lösungsraum von $A\vec{x}=\vec{0}$.<br>
+          $\text{im}(f) = \{f(\vec{x}) \mid \vec{x}\in V\}$ — Spaltenraum von $A$.<br>
+          <b>Dimensionsformel:</b> $\dim(\ker f) + \dim(\text{im}\,f) = \dim V$
+        </div>
+        <div class="box box-thm">
+          <strong>Lösungstheorie linearer Gleichungssysteme</strong>
+          Sei $A\in\mathbb{R}^{m\times n}$ und $(A|\vec{b})$ die erweiterte Koeffizientenmatrix. Nach Gauß-Jordan:
+          <ul>
+            <li>Ist eine <b>Nullzeile mit $b_i\neq 0$</b> entstanden: $0=1$ → <b>keine Lösung</b> (inkonsistent)</li>
+            <li>Ist der <b>Rang</b> $\text{rg}(A) = \text{rg}(A|\vec{b}) = n$: genau <b>eine Lösung</b></li>
+            <li>Ist der <b>Rang</b> $\text{rg}(A) = \text{rg}(A|\vec{b}) &lt; n$: <b>unendlich viele Lösungen</b> (freie Parameter: $n - \text{rg}(A)$)</li>
+          </ul>
+          <em>Merkhilfe: Anzahl freier Parameter = Anzahl Spalten − Rang(A)</em>
+        </div>
+        <div class="box box-def">
+          <strong>Lineare Abbildungen</strong>
+          $f: V\to W$ heißt <b>linear</b>, wenn $f(\vec{u}+\vec{v})=f(\vec{u})+f(\vec{v})$ und $f(\lambda\vec{v})=\lambda f(\vec{v})$. Jede lineare Abbildung zwischen endlichdimensionalen Vektorräumen wird durch eine Matrix $A$ dargestellt: $f(\vec{x})=A\vec{x}$.
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">4.3 Matrizen und Determinanten</h3>
+    <div class="card">
+      <div class="card-header">🔲 Matrizenrechnung, Falk-Schema und Inverse</div>
+      <div class="card-body">
+        <div class="box box-def">
+          <strong>Matrixmultiplikation (Falk-Schema)</strong>
+          $(AB)_{ij} = \sum_k A_{ik}B_{kj}$ — Zeile mal Spalte.<br>
+          Achtung: Im Allgemeinen $AB\neq BA$!
+        </div>
+        <div class="box box-def">
+          <strong>Inverse Matrix</strong>
+          $A^{-1}$ existiert gdw. $\det(A)\neq 0$. Berechnung: Gauß-Jordan auf $(A|I)\to(I|A^{-1})$.
+        </div>
+        <div class="box box-thm">
+          <strong>Determinanten</strong>
+          <b>2×2:</b> $\det\begin{pmatrix}a&b\\c&d\end{pmatrix} = ad-bc$<br><br>
+          <b>3×3 (Sarrus):</b>
+          $$\det(A) = a_{11}a_{22}a_{33}+a_{12}a_{23}a_{31}+a_{13}a_{21}a_{32} - a_{13}a_{22}a_{31}-a_{12}a_{21}a_{33}-a_{11}a_{23}a_{32}$$
+          <b>Laplace-Entwicklung:</b> $\det(A)=\sum_j (-1)^{i+j}a_{ij}\det(A_{ij})$ (Entwicklung nach Zeile/Spalte)
+        </div>
+        <div class="box box-thm">
+          <strong>Rechenregeln für Determinanten</strong>
+          <ul>
+            <li>$\det(AB) = \det(A)\cdot\det(B)$</li>
+            <li>$\det(A^{-1}) = \frac{1}{\det(A)}$</li>
+            <li>$\det(A^T) = \det(A)$</li>
+            <li>$\det(\lambda A) = \lambda^n \det(A)$ für $A\in\mathbb{R}^{n\times n}$</li>
+            <li>Zeile/Spalte mit Faktor $\lambda$ skalieren → $\det$ mit $\lambda$ multipliziert</li>
+            <li>Zwei Zeilen/Spalten tauschen → $\det$ negiert</li>
+            <li>Vielfaches einer Zeile zu anderer addieren → $\det$ unverändert</li>
+            <li>$A$ invertierbar $\Leftrightarrow$ $\det(A)\neq 0$</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">🎯 Eigenwerte und Eigenvektoren</div>
+      <div class="card-body">
+        <div class="box box-def">
+          <strong>Eigenwert / Eigenvektor</strong>
+          $\vec{v}\neq\vec{0}$ heißt <b>Eigenvektor</b> zum <b>Eigenwert</b> $\lambda$, wenn $A\vec{v}=\lambda\vec{v}$.
+          Das heißt $A$ streckt/staucht $\vec{v}$ nur, ohne die Richtung zu ändern.
+        </div>
+        <div class="box box-thm">
+          <strong>Berechnung</strong>
+          <ol>
+            <li><b>Charakteristisches Polynom:</b> $\det(A-\lambda I)=0$ lösen → Eigenwerte $\lambda_1,\lambda_2,\ldots$</li>
+            <li><b>Eigenvektoren:</b> Für jedes $\lambda_i$ das LGS $(A-\lambda_i I)\vec{v}=\vec{0}$ lösen.</li>
+          </ol>
+        </div>
+        <div class="box box-ex">
+          <strong>Beispiel</strong>
+          $A=\begin{pmatrix}3&1\\0&2\end{pmatrix}$. $\det(A-\lambda I)=(3-\lambda)(2-\lambda)=0 \Rightarrow \lambda_1=3, \lambda_2=2$.<br>
+          Für $\lambda_1=3$: $(A-3I)\vec{v}=\begin{pmatrix}0&1\\0&-1\end{pmatrix}\vec{v}=\vec{0} \Rightarrow \vec{v}=t\begin{pmatrix}1\\0\end{pmatrix}$.
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">4.4 Markov-Ketten und PageRank</h3>
+    <div class="card">
+      <div class="card-header">🔗 Anwendung: Markov-Ketten und PageRank</div>
+      <div class="card-body">
+        <div class="box box-def">
+          <strong>Markov-Kette</strong>
+          Eine <b>Markov-Kette</b> modelliert ein System, das sich in diskreten Schritten zwischen Zuständen bewegt. Die Übergangswahrscheinlichkeit hängt nur vom aktuellen Zustand ab (Markov-Eigenschaft / Gedächtnislosigkeit).<br>
+          Die <b>Übergangsmatrix</b> $P$ hat Einträge $P_{ij}$ = Wahrscheinlichkeit, von Zustand $j$ nach Zustand $i$ zu wechseln. Jede Spalte summiert zu 1 (stochastische Matrix).
+        </div>
+        <div class="box box-thm">
+          <strong>Stationäre Verteilung</strong>
+          Ein Wahrscheinlichkeitsvektor $\vec{\pi}$ heißt <b>stationäre Verteilung</b>, wenn $P\vec{\pi} = \vec{\pi}$, d.h. $\vec{\pi}$ ist ein Eigenvektor von $P$ zum Eigenwert $\lambda=1$. Er beschreibt das Langzeitverhalten der Kette.
+        </div>
+        <div class="box box-ex">
+          <strong>Beispiel: Wetter-Markov-Kette</strong>
+          Zustände: Sonnig (S), Regnerisch (R). Übergangsmatrix:
+          $$P = \begin{pmatrix}0.8 & 0.4 \\ 0.2 & 0.6\end{pmatrix}$$
+          ($P_{SS}=0.8$: War sonnig, bleibt sonnig mit 80%)<br>
+          Stationäre Verteilung: $(P-I)\vec{\pi}=\vec{0}$, d.h. $-0.2\pi_S + 0.4\pi_R=0$ und $\pi_S+\pi_R=1$.<br>
+          Lösung: $\pi_S = \tfrac{2}{3}$, $\pi_R = \tfrac{1}{3}$. Langfristig: 2/3 der Zeit sonnig.
+        </div>
+        <div class="box box-tip">
+          <strong>PageRank-Idee (Google)</strong>
+          Das Web als gerichteter Graph: Seiten = Zustände, Links = Übergänge. Ein zufälliger Surfer folgt Links gleichwahrscheinlich. Die <b>stationäre Verteilung</b> dieser Markov-Kette gibt den PageRank jeder Seite an – wichtige Seiten haben viele eingehende Links von ebenfalls wichtigen Seiten. Berechnung: dominanter Eigenvektor der Übergangsmatrix zum Eigenwert 1.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- KAPITEL 5: ANALYSIS                                                 -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<div id="ch5" class="chapter ch5">
+  <div class="hero">
+    <h2>Kapitel 5 · Analysis</h2>
+    <p>Folgen, Grenzwerte, Ableitungen und Integrale – die Mathematik des Kontinuierlichen, Stetigen und Veränderlichen.</p>
+    <div class="tags">
+      <span class="tag">Folgen &amp; Reihen</span><span class="tag">Stetigkeit</span><span class="tag">Differentiation</span>
+      <span class="tag">Kurvendiskussion</span><span class="tag">Integration</span><span class="tag">L'Hôpital</span><span class="tag">Finanzmathematik</span>
+    </div>
+  </div>
+  <div class="content">
+
+    <button class="cheat-toggle" onclick="toggleCheat('cs5')">📋 Cheat Sheet Kapitel 5 – Klick zum Öffnen ▼</button>
+    <div class="cheat-body" id="cs5">
+      <div class="cheat-row">
+        <div class="cheat-item"><div class="label">Ableitung (Def)</div>$f'(x)=\lim_{h\to 0}\frac{f(x+h)-f(x)}{h}$</div>
+        <div class="cheat-item"><div class="label">Potenzregel</div>$(x^n)'=nx^{n-1}$</div>
+        <div class="cheat-item"><div class="label">Produktregel</div>$(uv)'=u'v+uv'$</div>
+        <div class="cheat-item"><div class="label">Quotientenregel</div>$(u/v)'=(u'v-uv')/v^2$</div>
+        <div class="cheat-item"><div class="label">Kettenregel</div>$(f(g(x)))'=f'(g(x))\cdot g'(x)$</div>
+        <div class="cheat-item"><div class="label">L'Hôpital</div>$\lim\frac{f}{g}=\lim\frac{f'}{g'}$ bei $0/0$ oder $\infty/\infty$</div>
+        <div class="cheat-item"><div class="label">Stammfunktion</div>$\int x^n dx=\frac{x^{n+1}}{n+1}+C$</div>
+        <div class="cheat-item"><div class="label">Partielle Integration</div>$\int uv'\,dx=uv-\int u'v\,dx$</div>
+        <div class="cheat-item"><div class="label">Substitution</div>$\int f(g(x))g'(x)\,dx=\int f(u)\,du$</div>
+        <div class="cheat-item"><div class="label">Hauptsatz</div>$\int_a^b f(x)\,dx=F(b)-F(a)$</div>
+        <div class="cheat-item"><div class="label">Zinseszins</div>$K_n=K_0\cdot(1+i)^n$</div>
+        <div class="cheat-item"><div class="label">Rente (nachschüssig)</div>$R_n=r\cdot\frac{(1+i)^n-1}{i}$</div>
+        <div class="cheat-item"><div class="label">Hyperbel-Id.</div>$\cosh^2 x-\sinh^2 x=1$</div>
+        <div class="cheat-item"><div class="label">sin/cos Werte</div>$\sin 30°=\frac{1}{2}$, $\sin 45°=\frac{\sqrt{2}}{2}$, $\sin 60°=\frac{\sqrt{3}}{2}$</div>
+      </div>
+    </div>
+
+    <h3 class="section-title">5.0 Exponential- und Logarithmusgesetze</h3>
+    <div class="card">
+      <div class="card-header">📐 Potenz- und Logarithmenregeln</div>
+      <div class="card-body">
+        <div class="two-col">
+          <div class="box box-thm">
+            <strong>Potenzgesetze</strong>
+            $$a^m \cdot a^n = a^{m+n}$$
+            $$\frac{a^m}{a^n} = a^{m-n}$$
+            $$(a^m)^n = a^{mn}$$
+            $$(ab)^n = a^n b^n$$
+            $$a^0 = 1, \quad a^{-n} = \frac{1}{a^n}$$
+            $$a^{1/n} = \sqrt[n]{a}$$
+          </div>
+          <div class="box box-thm">
+            <strong>Logarithmengesetze</strong>
+            $$\log_a(xy) = \log_a x + \log_a y$$
+            $$\log_a\!\left(\frac{x}{y}\right) = \log_a x - \log_a y$$
+            $$\log_a(x^r) = r\cdot\log_a x$$
+            $$\log_a x = \frac{\ln x}{\ln a} \quad \text{(Basiswechsel)}$$
+            $$\log_a(a^x) = x, \quad a^{\log_a x} = x$$
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">5.1 Funktionen und wichtige Typen</h3>
+    <div class="card">
+      <div class="card-header">📈 Polynome, Rationale Funktionen, Trigonometrie</div>
+      <div class="card-body">
+        <div class="box box-def">
+          <strong>Polynom vom Grad n</strong>
+          $p(x)=a_n x^n + a_{n-1}x^{n-1}+\ldots+a_1x+a_0$, $a_n\neq 0$.
+          Nullstellen via pq-Formel (Grad 2): $x_{1,2}=-\frac{p}{2}\pm\sqrt{\frac{p^2}{4}-q}$.
+        </div>
+        <div class="box box-def">
+          <strong>Rationale Funktionen und Asymptoten</strong>
+          $f(x)=\frac{p(x)}{q(x)}$. Polstellen: Nullstellen von $q$ (nicht mit $p$ kürzen!)<br>
+          <ul>
+            <li>$\deg p < \deg q$: Horizontale Asymptote $y=0$</li>
+            <li>$\deg p = \deg q$: Horizontale Asymptote $y=a_n/b_m$</li>
+            <li>$\deg p = \deg q + 1$: Schiefe Asymptote (Polynomdivision)</li>
+          </ul>
+        </div>
+        <table>
+          <tr><th>Funktion</th><th>Ableitung</th><th>Stammfunktion</th></tr>
+          <tr><td>$\sin x$</td><td>$\cos x$</td><td>$-\cos x+C$</td></tr>
+          <tr><td>$\cos x$</td><td>$-\sin x$</td><td>$\sin x+C$</td></tr>
+          <tr><td>$e^x$</td><td>$e^x$</td><td>$e^x+C$</td></tr>
+          <tr><td>$\ln x$</td><td>$1/x$</td><td>$x\ln x - x+C$</td></tr>
+          <tr><td>$x^n$</td><td>$nx^{n-1}$</td><td>$\frac{x^{n+1}}{n+1}+C$</td></tr>
+          <tr><td>$1/x$</td><td>$-1/x^2$</td><td>$\ln|x|+C$</td></tr>
+          <tr><td>$\tan x$</td><td>$1/\cos^2 x$</td><td>$-\ln|\cos x|+C$</td></tr>
+          <tr><td>$\sinh x$</td><td>$\cosh x$</td><td>$\cosh x+C$</td></tr>
+          <tr><td>$\cosh x$</td><td>$\sinh x$</td><td>$\sinh x+C$</td></tr>
+        </table>
+        <div class="box box-thm">
+          <strong>Exakte Werte der Winkelfunktionen</strong>
+          <table>
+            <tr><th>Winkel</th><th>$0°$</th><th>$30°=\frac{\pi}{6}$</th><th>$45°=\frac{\pi}{4}$</th><th>$60°=\frac{\pi}{3}$</th><th>$90°=\frac{\pi}{2}$</th></tr>
+            <tr><td>$\sin$</td><td>$0$</td><td>$\frac{1}{2}$</td><td>$\frac{\sqrt{2}}{2}$</td><td>$\frac{\sqrt{3}}{2}$</td><td>$1$</td></tr>
+            <tr><td>$\cos$</td><td>$1$</td><td>$\frac{\sqrt{3}}{2}$</td><td>$\frac{\sqrt{2}}{2}$</td><td>$\frac{1}{2}$</td><td>$0$</td></tr>
+            <tr><td>$\tan$</td><td>$0$</td><td>$\frac{1}{\sqrt{3}}$</td><td>$1$</td><td>$\sqrt{3}$</td><td>$\infty$</td></tr>
+          </table>
+          <em>Merkhilfe sin: $\sqrt{0}/2, \sqrt{1}/2, \sqrt{2}/2, \sqrt{3}/2, \sqrt{4}/2$ → $0, \tfrac{1}{2}, \tfrac{\sqrt{2}}{2}, \tfrac{\sqrt{3}}{2}, 1$</em>
+        </div>
+        <div class="box box-thm">
+          <strong>Additionstheoreme</strong>
+          $$\sin(\alpha\pm\beta) = \sin\alpha\cos\beta \pm \cos\alpha\sin\beta$$
+          $$\cos(\alpha\pm\beta) = \cos\alpha\cos\beta \mp \sin\alpha\sin\beta$$
+          $$\tan(\alpha+\beta) = \frac{\tan\alpha+\tan\beta}{1-\tan\alpha\tan\beta}$$
+          Spezialfall (Doppelwinkel):
+          $$\sin(2\alpha)=2\sin\alpha\cos\alpha, \qquad \cos(2\alpha)=\cos^2\alpha-\sin^2\alpha$$
+        </div>
+        <div class="box box-def">
+          <strong>Hyperbelfunktionen</strong>
+          Definiert über Exponentialfunktionen, analog zu Sinus/Kosinus aber für den Einheitskreis → Einheitshyperbel:
+          $$\sinh x = \frac{e^x - e^{-x}}{2}, \qquad \cosh x = \frac{e^x + e^{-x}}{2}, \qquad \tanh x = \frac{\sinh x}{\cosh x}$$
+          Wichtige Identität (analog $\sin^2+\cos^2=1$): $\cosh^2 x - \sinh^2 x = 1$<br>
+          Ableitungen: $(\sinh x)' = \cosh x$, $(\cosh x)' = \sinh x$, $(\tanh x)' = \frac{1}{\cosh^2 x}$<br>
+          <em>Anwendung: Form von hängenden Seilen (Kettenlinie) ist ein $\cosh$-Graph.</em>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">5.2 Folgen und Reihen</h3>
+    <div class="card">
+      <div class="card-header">🔢 Konvergenz von Folgen und Reihen</div>
+      <div class="card-body">
+        <div class="box box-def">
+          <strong>Konvergenz einer Folge (ε-N-Definition)</strong>
+          $(a_n)$ konvergiert gegen $a$, wenn:
+          $$\forall \varepsilon>0\;\exists N\in\mathbb{N}\;\forall n\geq N: |a_n - a| < \varepsilon$$
+          <em>Ab einem Schritt $N$ liegt jedes Glied im Streifen $(a-\varepsilon, a+\varepsilon)$.</em>
+        </div>
+        <div class="box box-thm">
+          <strong>Wichtige Reihen</strong>
+          <ul>
+            <li><b>Geometrische Reihe:</b> $\sum_{k=0}^\infty q^k = \frac{1}{1-q}$ für $|q|<1$</li>
+            <li><b>Harmonische Reihe:</b> $\sum_{k=1}^\infty \frac{1}{k} = \infty$ (divergiert!)</li>
+            <li><b>Exponentialreihe:</b> $e^x = \sum_{k=0}^\infty \frac{x^k}{k!}$</li>
+          </ul>
+        </div>
+        <div class="box box-ex">
+          <strong>Beispiel: Grenzwertregeln</strong>
+          $\lim_{n\to\infty}\frac{3n^2+n}{2n^2-1}$: Zähler und Nenner durch $n^2$ teilen: $\frac{3+1/n}{2-1/n^2}\to\frac{3}{2}$.
+        </div>
+        <div class="box box-def">
+          <strong>Arithmetische und geometrische Folgen</strong>
+          <b>Arithmetische Folge:</b> $a_n = a_1 + (n-1)d$ (konstante Differenz $d$)<br>
+          Summe: $\sum_{k=1}^n a_k = \frac{n}{2}(a_1+a_n)$<br><br>
+          <b>Geometrische Folge:</b> $a_n = a_1\cdot q^{n-1}$ (konstanter Quotient $q$)<br>
+          Summe (für $q\neq 1$): $\sum_{k=1}^n a_k = a_1\cdot\frac{q^n-1}{q-1}$
+        </div>
+        <div class="box box-tip">
+          <strong>Potenzreihen</strong>
+          Eine <b>Potenzreihe</b> um $x_0$ ist $\sum_{k=0}^\infty c_k(x-x_0)^k$. Sie konvergiert für $|x-x_0|&lt;R$ (Konvergenzradius $R$).<br>
+          Wichtige Beispiele:
+          $$e^x = \sum_{k=0}^\infty \frac{x^k}{k!}, \quad \sin x = \sum_{k=0}^\infty \frac{(-1)^k x^{2k+1}}{(2k+1)!}, \quad \cos x = \sum_{k=0}^\infty \frac{(-1)^k x^{2k}}{(2k)!}$$
+          $$\frac{1}{1-x} = \sum_{k=0}^\infty x^k \quad (|x|&lt;1)$$
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">5.3 Differentialrechnung</h3>
+    <div class="card">
+      <div class="card-header">∂ Ableitungen und Kurvendiskussion</div>
+      <div class="card-body">
+        <div class="box box-def">
+          <strong>Ableitung als Grenzwert</strong>
+          $$f'(x) = \lim_{h\to 0} \frac{f(x+h)-f(x)}{h}$$
+          Geometrisch: Steigung der Tangente an den Graphen im Punkt $(x,f(x))$.
+        </div>
+        <div class="box box-thm">
+          <strong>Ableitungsregeln</strong>
+          <table>
+            <tr><th>Regel</th><th>Formel</th></tr>
+            <tr><td>Linearität</td><td>$(\alpha f+\beta g)'=\alpha f'+\beta g'$</td></tr>
+            <tr><td>Produktregel</td><td>$(f\cdot g)'=f'g+fg'$</td></tr>
+            <tr><td>Quotientenregel</td><td>$(f/g)'=\frac{f'g-fg'}{g^2}$</td></tr>
+            <tr><td>Kettenregel</td><td>$(f(g(x)))'=f'(g(x))\cdot g'(x)$</td></tr>
+          </table>
+        </div>
+        <div class="box box-thm">
+          <strong>Kurvendiskussion (Schema)</strong>
+          <ol>
+            <li><b>Definitionsbereich</b></li>
+            <li><b>Symmetrie:</b> gerade ($f(-x)=f(x)$) oder ungerade ($f(-x)=-f(x)$)?</li>
+            <li><b>Nullstellen:</b> $f(x)=0$</li>
+            <li><b>Extrema:</b> $f'(x)=0$, dann $f''$ prüfen ($>0$: Minimum, $<0$: Maximum)</li>
+            <li><b>Wendepunkte:</b> $f''(x)=0$ und $f''$ wechselt Vorzeichen</li>
+            <li><b>Asymptoten</b></li>
+            <li><b>Skizze</b></li>
+          </ol>
+        </div>
+        <div class="box box-tip">
+          <strong>L'Hôpital'sche Regel</strong>
+          Bei unbestimmten Formen $\frac{0}{0}$ oder $\frac{\infty}{\infty}$:
+          $$\lim_{x\to a}\frac{f(x)}{g(x)} = \lim_{x\to a}\frac{f'(x)}{g'(x)}$$
+          Beispiel: $\lim_{x\to 0}\frac{\sin x}{x} \overset{\text{L'H}}{=} \lim_{x\to 0}\frac{\cos x}{1}=1$.
+        </div>
+        <div class="box box-def">
+          <strong>Newton-Verfahren (Nullstellen numerisch)</strong>
+          $$x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}$$
+          Startwert $x_0$ wählen, iterieren bis Konvergenz.
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">5.3b Extremwertaufgaben</h3>
+    <div class="card">
+      <div class="card-header">🎯 Optimierungsaufgaben mit Differentialrechnung</div>
+      <div class="card-body">
+        <div class="box box-def">
+          <strong>Vorgehen bei Extremwertaufgaben</strong>
+          <ol>
+            <li><b>Zielfunktion aufstellen:</b> Was soll maximiert/minimiert werden? (Fläche, Volumen, Kosten, …)</li>
+            <li><b>Nebenbedingung:</b> Welche Einschränkung gibt es? → Eine Variable durch die andere ausdrücken.</li>
+            <li><b>Einsetzen:</b> Zielfunktion in einer Variablen schreiben.</li>
+            <li><b>Ableiten und nullsetzen:</b> $f'(x)=0$ → Kandidaten für Extrema.</li>
+            <li><b>Art des Extremums prüfen:</b> $f''(x)&gt;0$ → Minimum; $f''(x)&lt;0$ → Maximum.</li>
+            <li><b>Randwerte prüfen!</b> (falls Definitionsbereich beschränkt)</li>
+          </ol>
+        </div>
+        <div class="box box-ex">
+          <strong>Beispiel: Optimales Rechteck</strong>
+          Gesucht: Rechteck mit Umfang $U=20$ und maximaler Fläche.<br>
+          Zielfunktion: $A = x\cdot y$. Nebenbedingung: $2x+2y=20 \Rightarrow y=10-x$.<br>
+          $A(x) = x(10-x) = 10x-x^2$<br>
+          $A'(x) = 10-2x \stackrel{!}{=} 0 \Rightarrow x=5$<br>
+          $A''(x) = -2 &lt; 0$ → Maximum. Also: Quadrat ($x=y=5$) mit $A=25$ ist optimal.
+        </div>
+        <div class="box box-ex">
+          <strong>Beispiel: Dose mit minimalem Materialverbrauch</strong>
+          Zylinder mit Volumen $V=1000$ cm³. Gesucht: Abmessungen für minimale Oberfläche.<br>
+          $O = 2\pi r^2 + 2\pi r h$, $V=\pi r^2 h = 1000 \Rightarrow h = \frac{1000}{\pi r^2}$<br>
+          $O(r) = 2\pi r^2 + \frac{2000}{r}$<br>
+          $O'(r) = 4\pi r - \frac{2000}{r^2} = 0 \Rightarrow r^3 = \frac{500}{\pi} \Rightarrow r\approx 5{,}42\,\text{cm}$, $h=2r$.<br>
+          <em>Optimale Dose: Höhe = Durchmesser.</em>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">5.3c Finanzmathematik</h3>
+    <div class="card">
+      <div class="card-header">💰 Zinseszins, Renten und Tilgungsrechnung</div>
+      <div class="card-body">
+        <div class="box box-def">
+          <strong>Zinseszinsformel</strong>
+          Kapital $K_0$ wächst bei Zinssatz $p\%$ pro Periode nach $n$ Perioden auf:
+          $$K_n = K_0 \cdot (1+i)^n \quad \text{mit } i = \frac{p}{100}$$
+          <em>Beispiel: 1000 € bei 5% p.a. nach 10 Jahren: $K_{10} = 1000\cdot 1{,}05^{10} \approx 1628{,}89$ €</em>
+        </div>
+        <div class="box box-def">
+          <strong>Rentenrechnung</strong>
+          <b>Vorschüssige Rente:</b> Zahlung am Anfang jeder Periode (z.B. Miete voraus).<br>
+          <b>Nachschüssige Rente:</b> Zahlung am Ende jeder Periode (z.B. Gehalt).<br>
+          Gleichbleibende Rate $r$, Zinssatz $i$, $n$ Perioden:
+          <table>
+            <tr><th></th><th>Rentenendwert $R_n$</th><th>Rentenbarwert $R_0$</th></tr>
+            <tr><td><b>Nachschüssig</b></td><td>$r\cdot\dfrac{(1+i)^n-1}{i}$</td><td>$r\cdot\dfrac{1-(1+i)^{-n}}{i}$</td></tr>
+            <tr><td><b>Vorschüssig</b></td><td>$r\cdot\dfrac{(1+i)^n-1}{i}\cdot(1+i)$</td><td>$r\cdot\dfrac{1-(1+i)^{-n}}{i}\cdot(1+i)$</td></tr>
+          </table>
+        </div>
+        <div class="box box-def">
+          <strong>Ratentilgung</strong>
+          Kredit $K_0$ wird in $n$ gleichen <b>Tilgungsraten</b> $T = K_0/n$ abgezahlt. Die Gesamtrate sinkt, da die Zinslast abnimmt:
+          <ul>
+            <li>Tilgungsrate: $T = K_0/n$ (konstant)</li>
+            <li>Zinsen im Jahr $k$: $Z_k = K_{k-1}\cdot i$</li>
+            <li>Gesamtrate im Jahr $k$: $A_k = T + Z_k$ (sinkend)</li>
+          </ul>
+        </div>
+        <div class="box box-def">
+          <strong>Annuitätentilgung</strong>
+          Kredit $K_0$ wird durch $n$ gleiche Gesamtraten (Annuitäten) $A$ abgezahlt:
+          $$A = K_0 \cdot \frac{i(1+i)^n}{(1+i)^n - 1}$$
+          Tilgungsanteil steigt, Zinsanteil sinkt.
+        </div>
+        <div class="box box-ex">
+          <strong>Beispiel: Annuitätentilgung</strong>
+          Kredit $K_0 = 100\,000$ €, Zinssatz $i=4\%$, Laufzeit $n=10$ Jahre.<br>
+          $A = 100\,000 \cdot \dfrac{0{,}04\cdot 1{,}04^{10}}{1{,}04^{10}-1} \approx 12\,329$ € / Jahr.<br>
+          Jahr 1: Zinsen $4\,000$ €, Tilgung $8\,329$ €. Jahr 2: Restschuld $91\,671$ €, Zinsen $3\,667$ €, Tilgung $8\,662$ €. Usw.
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">5.4 Integralrechnung</h3>
+    <div class="card">
+      <div class="card-header">∫ Riemann-Integral und Integrationsregeln</div>
+      <div class="card-body">
+        <div class="box box-def">
+          <strong>Riemann-Integral</strong>
+          Das bestimmte Integral $\int_a^b f(x)\,dx$ ist der (vorzeichenbehaftete) Flächeninhalt zwischen Kurve und $x$-Achse. Formal: Grenzwert von Riemann-Summen.
+        </div>
+        <div class="box box-thm">
+          <strong>Hauptsatz der Differential- und Integralrechnung</strong>
+          Sei $F$ eine Stammfunktion von $f$ (d.h. $F'=f$):
+          $$\int_a^b f(x)\,dx = F(b)-F(a) = \Big[F(x)\Big]_a^b$$
+        </div>
+        <div class="box box-thm">
+          <strong>Integrationstechniken</strong>
+          <b>Partielle Integration:</b>
+          $$\int u\,v'\,dx = uv - \int u'v\,dx$$
+          Merkhilfe LIATE: Logarithmus, Invers, Algebraisch, Trigonometrisch, Exponential – von links wählt man $u$.
+          <br><br>
+          <b>Substitution:</b> Setze $u=g(x)$, dann $du=g'(x)\,dx$:
+          $$\int f(g(x))\,g'(x)\,dx = \int f(u)\,du$$
+          <br>
+          <b>Logarithmische Integration:</b>
+          $$\int \frac{f'(x)}{f(x)}\,dx = \ln|f(x)| + C$$
+        </div>
+        <div class="box box-ex">
+          <strong>Beispiel: Partielle Integration</strong>
+          $\int x e^x\,dx$: $u=x$, $v'=e^x \Rightarrow u'=1$, $v=e^x$.<br>
+          $= xe^x - \int e^x\,dx = xe^x - e^x + C = (x-1)e^x + C$.
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">5.5 Stetigkeit</h3>
+    <div class="card">
+      <div class="card-header">〰 Stetigkeit und Zwischenwertsatz</div>
+      <div class="card-body">
+        <div class="box box-def">
+          <strong>Stetigkeit</strong>
+          $f$ ist <b>stetig</b> in $x_0$, wenn $\lim_{x\to x_0} f(x) = f(x_0)$.
+          Anschaulich: Keine Sprünge, keine Lücken, kein Abriss.
+        </div>
+        <div class="box box-thm">
+          <strong>Zwischenwertsatz</strong>
+          Sei $f$ stetig auf $[a,b]$ und $f(a)\neq f(b)$. Dann nimmt $f$ jeden Wert zwischen $f(a)$ und $f(b)$ an.<br>
+          Korollar: Hat $f$ auf $[a,b]$ einen Vorzeichenwechsel, gibt es eine Nullstelle in $(a,b)$.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- KAPITEL 6: BOOLESCHE ALGEBRA                                        -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<div id="ch6" class="chapter ch6">
+  <div class="hero">
+    <h2>Kapitel 6 · Boolesche Algebra &amp; Digitaltechnik</h2>
+    <p>Die Mathematik hinter Computer-Schaltkreisen: Boolesche Algebren, Logikgatter und Karnaugh-Veitch-Diagramme.</p>
+    <div class="tags">
+      <span class="tag">Boolesche Algebra</span><span class="tag">DNF / KNF</span><span class="tag">Logikgatter</span>
+      <span class="tag">KV-Diagramme</span><span class="tag">Minimierung</span><span class="tag">Stone-Darstellung</span>
+    </div>
+  </div>
+  <div class="content">
+
+    <button class="cheat-toggle" onclick="toggleCheat('cs6')">📋 Cheat Sheet Kapitel 6 – Klick zum Öffnen ▼</button>
+    <div class="cheat-body" id="cs6">
+      <div class="cheat-row">
+        <div class="cheat-item"><div class="label">Boolesche Algebra</div>$(B,\lor,\land,\overline{\cdot},0,1)$ mit 5 Axiomgruppen</div>
+        <div class="cheat-item"><div class="label">Dualitätsprinzip</div>$\lor\leftrightarrow\land$, $0\leftrightarrow 1$ tauschen → dualer Satz gilt auch</div>
+        <div class="cheat-item"><div class="label">De Morgan</div>$\overline{a\land b}=\bar{a}\lor\bar{b}$, $\overline{a\lor b}=\bar{a}\land\bar{b}$</div>
+        <div class="cheat-item"><div class="label">DNF</div>ODER-Verknüpfung von Mintermen (Zeilen mit Ergebnis 1)</div>
+        <div class="cheat-item"><div class="label">KNF</div>UND-Verknüpfung von Maxtermen (Zeilen mit Ergebnis 0)</div>
+        <div class="cheat-item"><div class="label">KV-Diagramm</div>Gray-Code-Anordnung, Blöcke der Größe $2^k$ zusammenfassen</div>
+        <div class="cheat-item"><div class="label">NAND vollständig</div>Jede Boolesche Funktion durch NAND darstellbar</div>
+        <div class="cheat-item"><div class="label">Don't Care</div>Einträge $X$ dürfen als 0 oder 1 gewählt werden (Minimierung)</div>
+        <div class="cheat-item"><div class="label">XOR</div>$a\oplus b = (a\land\bar{b})\lor(\bar{a}\land b)$</div>
+        <div class="cheat-item"><div class="label">Mintermblock</div>$k$ Variablen weg = Block der Größe $2^k$</div>
+      </div>
+    </div>
+
+    <h3 class="section-title">6.1 Boolesche Algebren</h3>
+    <div class="card">
+      <div class="card-header">⚡ Definition und Axiome</div>
+      <div class="card-body">
+        <div class="box box-def">
+          <strong>Boolesche Algebra</strong>
+          $(B, \lor, \land, \overline{\cdot}, 0, 1)$ heißt <b>Boolesche Algebra</b>, wenn für alle $a,b,c\in B$ gilt:
+          <table>
+            <tr><th>Axiomgruppe</th><th>für ∨</th><th>für ∧</th></tr>
+            <tr><td>Kommutativität</td><td>$a\lor b=b\lor a$</td><td>$a\land b=b\land a$</td></tr>
+            <tr><td>Assoziativität</td><td>$(a\lor b)\lor c=a\lor(b\lor c)$</td><td>analog</td></tr>
+            <tr><td>Neutrales Element</td><td>$a\lor 0=a$</td><td>$a\land 1=a$</td></tr>
+            <tr><td>Distributivität</td><td>$a\lor(b\land c)=(a\lor b)\land(a\lor c)$</td><td>analog</td></tr>
+            <tr><td>Komplement</td><td>$a\lor\bar{a}=1$</td><td>$a\land\bar{a}=0$</td></tr>
+          </table>
+        </div>
+        <div class="box box-ex">
+          <strong>Beispiele für Boolesche Algebren</strong>
+          <ul>
+            <li>$\mathbb{Z}_2 = \{0,1\}$: Die kleinste nicht-triviale Boolesche Algebra</li>
+            <li>$(\mathcal{P}(M), \cup, \cap, \overline{\cdot}, \emptyset, M)$: Potenzmengealgebra</li>
+            <li>$D_{30} = $ Teiler von 30: $\{1,2,3,5,6,10,15,30\}$ mit $\text{kgV}$, $\text{ggT}$</li>
+          </ul>
+        </div>
+        <div class="box box-thm">
+          <strong>Dualitätsprinzip &amp; abgeleitete Gesetze</strong>
+          Jedes wahre Gesetz bleibt wahr, wenn man $\lor\leftrightarrow\land$ und $0\leftrightarrow 1$ tauscht.<br>
+          Wichtige abgeleitete Gesetze: Absorption ($a\lor(a\land b)=a$), Idempotenz ($a\lor a=a$), Doppeltes Komplement ($\overline{\bar{a}}=a$).
+        </div>
+        <div class="box box-def">
+          <strong>Isomorphismus Boolescher Algebren</strong>
+          Zwei Boolesche Algebren $(B_1,\lor_1,\land_1,\overline{\cdot}_1,0_1,1_1)$ und $(B_2,\lor_2,\land_2,\overline{\cdot}_2,0_2,1_2)$ sind <b>isomorph</b>, wenn es eine bijektive Abbildung $\varphi: B_1\to B_2$ gibt, die alle Operationen erhält:
+          $\varphi(a\lor_1 b)=\varphi(a)\lor_2\varphi(b)$, $\varphi(a\land_1 b)=\varphi(a)\land_2\varphi(b)$, $\varphi(\overline{a}_1)=\overline{\varphi(a)}_2$.<br>
+          <em>Beispiel: $D_{30}$ (Teiler von 30 mit ggT und kgV) ist isomorph zu $\mathcal{P}(\{2,3,5\})$ (Potenzmenge der Primfaktoren). Der Isomorphismus: Teiler $d \mapsto$ Menge seiner Primteiler.</em>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">6.2 Boolesche Funktionen und Normalformen</h3>
+    <div class="card">
+      <div class="card-header">📝 DNF, KNF und Wahrheitstabellen</div>
+      <div class="card-body">
+        <div class="box box-def">
+          <strong>Boolesche Funktion</strong>
+          $f: \{0,1\}^n \to \{0,1\}$ ordnet jedem $n$-Bit-Eingabetupel einen Ausgabewert zu. Es gibt $2^{2^n}$ verschiedene solche Funktionen.
+        </div>
+        <div class="box box-def">
+          <strong>Disjunktive Normalform (DNF)</strong>
+          ODER-Verknüpfung von Mintermen. Minterm = AND-Verknüpfung aller Variablen (negiert falls 0).<br>
+          <b>Vorgehen:</b> Alle Zeilen der Wahrheitstabelle mit $f=1$ sammeln → Minterm je Zeile bilden → mit ODER verknüpfen.
+        </div>
+        <div class="box box-def">
+          <strong>Konjunktive Normalform (KNF)</strong>
+          UND-Verknüpfung von Maxtermen. Maxterm = OR-Verknüpfung aller Variablen (negiert falls 1).<br>
+          <b>Vorgehen:</b> Alle Zeilen der Wahrheitstabelle mit $f=0$ sammeln → Maxterm je Zeile → mit UND verknüpfen.
+        </div>
+        <div class="box box-ex">
+          <strong>Beispiel: f(a,b) mit DNF und KNF</strong>
+          <table>
+            <tr><th>$a$</th><th>$b$</th><th>$f$</th><th>Minterm</th><th>Maxterm</th></tr>
+            <tr><td>0</td><td>0</td><td>0</td><td>–</td><td>$a\lor b$</td></tr>
+            <tr><td>0</td><td>1</td><td>1</td><td>$\bar{a}\land b$</td><td>–</td></tr>
+            <tr><td>1</td><td>0</td><td>1</td><td>$a\land\bar{b}$</td><td>–</td></tr>
+            <tr><td>1</td><td>1</td><td>0</td><td>–</td><td>$\bar{a}\lor\bar{b}$</td></tr>
+          </table>
+          DNF: $f = (\bar{a}\land b)\lor(a\land\bar{b})$ = XOR!<br>
+          KNF: $f = (a\lor b)\land(\bar{a}\lor\bar{b})$
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">6.3 Logikgatter</h3>
+    <div class="card">
+      <div class="card-header">🔌 Gatter und Transistorprinzip</div>
+      <div class="card-body">
+        <table>
+          <tr><th>Gatter</th><th>Symbol</th><th>Funktion</th><th>Formel</th></tr>
+          <tr><td>AND</td><td>&amp;</td><td>Beide 1 → 1</td><td>$a\land b$</td></tr>
+          <tr><td>OR</td><td>≥1</td><td>Einer 1 → 1</td><td>$a\lor b$</td></tr>
+          <tr><td>NOT</td><td>○</td><td>Invertierung</td><td>$\bar{a}$</td></tr>
+          <tr><td>NAND</td><td>AND+○</td><td>Nicht-Und</td><td>$\overline{a\land b}$</td></tr>
+          <tr><td>NOR</td><td>OR+○</td><td>Nicht-Oder</td><td>$\overline{a\lor b}$</td></tr>
+          <tr><td>XOR</td><td>=1</td><td>Genau einer 1</td><td>$a\oplus b$</td></tr>
+          <tr><td>XNOR</td><td>=1+○</td><td>Gleichheit</td><td>$\overline{a\oplus b}$</td></tr>
+        </table>
+        <div class="box box-tip">
+          <strong>Vollständiges System</strong>
+          {NAND} und {NOR} sind je für sich <b>vollständige Systeme</b> – jede Boolesche Funktion lässt sich allein durch NAND- (bzw. NOR-) Gatter realisieren. Das ist praktisch: nur ein Gattertyp für alles!
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">6.3b Schaltkreisdiagramme</h3>
+    <div class="card">
+      <div class="card-header">⚡ Schließer, Öffner und Schaltkreise</div>
+      <div class="card-body">
+        <div class="box box-def">
+          <strong>Schließer und Öffner</strong>
+          In der klassischen Schaltalgebra:
+          <ul>
+            <li><b>Schließer (Schalterkontakt):</b> Offen = 0 (kein Strom), Geschlossen = 1 (Strom). Entspricht dem Variablenwert $a$.</li>
+            <li><b>Öffner (Ruhekontakt):</b> Offen = 1, Geschlossen = 0. Entspricht $\bar{a}$ (Komplement).</li>
+          </ul>
+        </div>
+        <div class="box box-def">
+          <strong>Reihenschaltung = AND, Parallelschaltung = OR</strong>
+          <ul>
+            <li><b>Reihenschaltung:</b> Strom fließt nur, wenn <em>beide</em> Schalter geschlossen → AND ($a\land b$)</li>
+            <li><b>Parallelschaltung:</b> Strom fließt, wenn <em>mindestens einer</em> geschlossen → OR ($a\lor b$)</li>
+          </ul>
+          Beliebige Boolesche Ausdrücke lassen sich so als Schaltkreise darstellen und umgekehrt.
+        </div>
+        <div class="box box-ex">
+          <strong>Beispiel: Schaltung für XOR</strong>
+          $f(a,b) = (a\land\bar{b})\lor(\bar{a}\land b)$: Zwei Parallelpfade, jeder mit einem Schließer und einem Öffner in Reihe. Strom fließt genau dann, wenn $a$ und $b$ verschieden sind.
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">6.4 Karnaugh-Veitch-Diagramme (KV)</h3>
+    <div class="card">
+      <div class="card-header">🗺 KV-Diagramme zur Minimierung</div>
+      <div class="card-body">
+        <div class="box box-def">
+          <strong>Idee des KV-Diagramms</strong>
+          Eine tabellarische Darstellung der Wahrheitstabelle, bei der benachbarte Zellen sich in genau einer Variable unterscheiden (<b>Gray-Code-Anordnung</b>). Benachbarte Einsen können zusammengefasst und damit Terme vereinfacht werden.
+        </div>
+        <div class="box box-thm">
+          <strong>Regeln für das Zusammenfassen (Blockbildung)</strong>
+          <ol>
+            <li>Blöcke müssen eine Größe von $2^k$ ($1,2,4,8,\ldots$) haben</li>
+            <li>Blöcke dürfen sich überlappen</li>
+            <li>Das KV-Diagramm ist <b>torusförmig</b>: Ränder wraparound (oben–unten und links–rechts verbunden)</li>
+            <li>Möglichst große Blöcke bilden → möglichst kurzer Term</li>
+            <li>Don't-Care-Einträge ($X$) dürfen als 0 oder 1 verwendet werden, je nach Vorteil</li>
+          </ol>
+        </div>
+        <div class="box box-ex">
+          <strong>KV-Diagramm für 2 Variablen (a, b)</strong>
+          <table>
+            <tr><th></th><th>$\bar{b}$ (b=0)</th><th>$b$ (b=1)</th></tr>
+            <tr><td>$\bar{a}$ (a=0)</td><td>$m_0$</td><td>$m_1$</td></tr>
+            <tr><td>$a$ (a=1)</td><td>$m_2$</td><td>$m_3$</td></tr>
+          </table>
+          Füllung für $f(a,b) = a\oplus b$: $m_0=0, m_1=1, m_2=1, m_3=0$.<br>
+          Die Einsen bei $m_1$ und $m_2$ sind nicht benachbart (andere Variable ändert sich). DNF: $\bar{a}b \lor a\bar{b}$ – nicht weiter minimierbar.
+        </div>
+        <div class="box box-ex">
+          <strong>KV-Diagramm 4 Variablen: Standardanordnung</strong>
+          <table>
+            <tr><th>ab\cd</th><th>00</th><th>01</th><th>11</th><th>10</th></tr>
+            <tr><td><b>00</b></td><td>$m_0$</td><td>$m_1$</td><td>$m_3$</td><td>$m_2$</td></tr>
+            <tr><td><b>01</b></td><td>$m_4$</td><td>$m_5$</td><td>$m_7$</td><td>$m_6$</td></tr>
+            <tr><td><b>11</b></td><td>$m_{12}$</td><td>$m_{13}$</td><td>$m_{15}$</td><td>$m_{14}$</td></tr>
+            <tr><td><b>10</b></td><td>$m_8$</td><td>$m_9$</td><td>$m_{11}$</td><td>$m_{10}$</td></tr>
+          </table>
+          Gray-Code-Reihenfolge 00→01→11→10 stellt sicher, dass je zwei benachbarte Spalten/Zeilen sich nur in einer Variable unterscheiden.
+        </div>
+        <div class="box box-tip">
+          <strong>Minterm- vs. Maxtermmethode</strong>
+          <b>Mintermm.</b> (für DNF): Einsen im KV zusammenfassen.<br>
+          <b>Maxtermmethode</b> (für KNF): Nullen im KV zusammenfassen → komplementieren.
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">6.5 Stone-Darstellungssatz</h3>
+    <div class="card">
+      <div class="card-header">🗿 Boolesche Algebren und Atome</div>
+      <div class="card-body">
+        <div class="box box-thm">
+          <strong>Atom einer Booleschen Algebra</strong>
+          $a\in B\setminus\{0\}$ heißt <b>Atom</b>, wenn gilt: $\forall b\in B: b\leq a \Rightarrow b=0$ oder $b=a$. Atome sind die "minimalen positiven Elemente".
+        </div>
+        <div class="box box-thm">
+          <strong>Stone-Darstellungssatz (endlicher Fall)</strong>
+          Jede endliche Boolesche Algebra mit $n$ Atomen ist isomorph zur Potenzmengealgebra $(\mathcal{P}(M), \cup, \cap, \overline{\cdot})$ mit $|M|=n$. Daraus folgt: $|B|=2^n$.
+        </div>
+        <div class="box box-ex">
+          <strong>Beispiel: D₃₀</strong>
+          $D_{30}$: Teiler von 30. Atome (Primteiler): $2, 3, 5$. Also $|D_{30}|=2^3=8$. Isomorph zu $\mathcal{P}(\{p_1,p_2,p_3\})$.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function showChapter(n){
+  document.querySelectorAll('.chapter').forEach(c=>c.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('ch'+n).classList.add('active');
+  document.querySelector('.tab[data-ch="'+n+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleCheat(id){
+  const el=document.getElementById(id);
+  el.classList.toggle('open');
+  const btn=el.previousElementSibling;
+  btn.textContent=el.classList.contains('open')
+    ? btn.textContent.replace('▼','▲').replace('Öffnen','Schließen')
+    : btn.textContent.replace('▲','▼').replace('Schließen','Öffnen');
+}
+</script>
+</body>
+</html>
